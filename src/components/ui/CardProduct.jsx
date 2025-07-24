@@ -21,8 +21,8 @@ function cardProduct({
         <p className="productState">{productState}</p>
       </div>
       <div className="product-actions">
-        <SmallerButton buttonMenssage="Ver Detalhes" />
-        <SmallerButton buttonMenssage="Propor troca" />
+        <SmallerButton buttonMessage="Ver Detalhes" />
+        <SmallerButton buttonMessage="Propor troca" />
       </div>
     </div>
   );

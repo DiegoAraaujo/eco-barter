@@ -1,9 +1,9 @@
 import '../../styles/smallerButton.css'
 
-function smallerButton({ buttontype, buttonMenssage }) {
+function smallerButton({ buttontype, buttonMessage }) {
   return ( 
     <button type={buttontype || "button"} className='smallerButton'> 
-      {buttonMenssage}
+      {buttonMessage}
     </button>
 );
 }

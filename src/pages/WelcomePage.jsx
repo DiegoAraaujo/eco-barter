@@ -1,6 +1,7 @@
 import HeroBanner from "../components/layout/HeroBanner";
 import PopularCategories from "../components/layout/PopularCategories";
 import AvailableProducts  from "../components/layout/AvailableProducts";
+import CallSection  from "../components/layout/CallSection";
 
 function welcomePage() {
   return (
@@ -8,6 +9,7 @@ function welcomePage() {
       <HeroBanner/>
       <PopularCategories/>
       <AvailableProducts/>
+      <CallSection/>
     </section>
   );
 }

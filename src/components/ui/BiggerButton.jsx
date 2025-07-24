@@ -1,9 +1,9 @@
 import '../../styles/biggerButton.css'
 
-function biggerButton({ buttontype, buttonMenssage }) {
+function biggerButton({ buttontype, buttonMessage }) {
   return ( 
     <button type={buttontype || "button"} className='biggerButton'> 
-      {buttonMenssage}
+      {buttonMessage}
     </button>
 );
 }
