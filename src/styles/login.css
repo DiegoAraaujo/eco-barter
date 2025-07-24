@@ -1,0 +1,96 @@
+.pageLogin {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainLogin {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: url("../assets/bgLogin.png"); 
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .mainLogin {
+    justify-content: center;
+  }
+}
+
+.bgForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--overlay-light);
+  width: 25%;
+  margin-right: 15rem;
+  border-radius: 30px;
+  row-gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .bgForm {
+    margin: 0;
+    width: 80%;
+  }
+}
+
+.bgForm img {
+  width: 70%;
+}
+
+.textTopForm {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  font-weight: bolder;
+  padding-bottom: 1.5rem;
+}
+
+.formLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2.5rem;
+  width: 100%;
+}
+
+.formLogin input {
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  width: 70%;
+}
+
+.formLogin button {
+  all: unset;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--card-color);
+  font-size: 2rem;
+  width: 70%;
+  text-align: center;
+  border-radius: 10px;
+  padding: 1rem 0;
+  font-weight: bolder;
+}
+
+.textBottomForm {
+  font-size: 1.2rem;
+  color: var(--register-color);
+  padding-bottom: 5rem;
+}
+
+.textBottomForm a {
+  text-decoration: none;
+  color: var(--register-color);
+  font-weight: bolder;
+  font-size: 1.3rem;
+}
