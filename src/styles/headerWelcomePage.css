@@ -1,0 +1,12 @@
+.header-welcome-page {
+  padding: 1rem 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--dark-green);
+}
+
+.header-welcome-actions {
+  display: flex;
+  gap: 2rem;
+}

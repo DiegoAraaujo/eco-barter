@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap");
+
 :root {
   --primary-color: #31572c;
   --form-color: #e7ece8;
@@ -9,7 +11,7 @@
   --overlay-light: rgba(240, 240, 240, 0.8);
   --title-form-color: #90a955;
   --text-color-black: black;
-  --text-color-white:white
+  --text-color-white: white;
 }
 
 * {
@@ -21,6 +23,7 @@
 body,
 html {
   font-size: 62.5%; /* 10px */
+  font-family: "Lexend", sans-serif;
 }
 
 :root {

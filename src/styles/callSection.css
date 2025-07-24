@@ -1,14 +1,14 @@
-.call-section{
+.call-section {
   display: flex;
   justify-content: center;
-  background-image: url('../assets/background-hero-section.svg');
+  background-image: url("../assets/background-call-section.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   padding: 3rem 2rem;
 }
 
-.last-call-container{
+.last-call-container {
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -16,27 +16,25 @@
   max-width: 800px;
   width: 100%;
   padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.577);
 }
 
-.call-section-image{
-}
-
-.call-section-image > img{
+.call-section-image > img {
   width: 35rem;
 }
 
-.call-section-message{
+.call-section-message {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.call-section-message > h2{
+.call-section-message > h2 {
   font-size: 2.5rem;
   color: var(--dark-green);
 }
 
 .call-section-message > p {
   font-size: 1.5rem;
-  color:var(--primary-color) ;
+  color: var(--primary-color);
 }
