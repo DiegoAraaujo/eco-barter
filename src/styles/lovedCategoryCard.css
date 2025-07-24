@@ -1,0 +1,25 @@
+.category{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding:  1rem;
+  border-radius: 15px;
+  gap: 1rem;
+  transition: ease 0.3s transform;
+}
+
+.category:hover{
+  transform: scale(1.050);
+  cursor: pointer;
+}
+
+.category > img{
+  height: 80px;
+}
+
+.category > p{
+  color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+  font-weight: 600;
+}

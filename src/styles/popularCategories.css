@@ -1,0 +1,23 @@
+.popular-categories-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  background-color: #EEF4EF;
+  padding: 3rem;
+}
+
+.popular-categories-section > h2{
+  color: #31572C;
+  font-size: 2.5rem;
+}
+
+.popular-categories-list{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #4F772D;
+  padding: 3rem;
+  gap: 5rem;
+  width: 100%;
+}
