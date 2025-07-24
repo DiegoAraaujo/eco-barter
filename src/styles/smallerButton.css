@@ -1,0 +1,18 @@
+.smallerButton{
+  all: unset;
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: ease 0.3s transform;
+}
+
+.smallerButton:hover{
+  cursor: pointer;
+  transform: scale(1.050);
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
