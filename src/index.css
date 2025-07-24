@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ }
+ body, html{
+  font-size: 62.5%; /* 10px */
+  font-family: 'Lexend', sans-serif;
+ }
+ :root {
+  --primary-color: #31572C;
+  --form-color:#E7ECE8;
+  --dark-green:#132A13;
+  --footer-color: #ECF39E;
+  --bg-color: #eef4ef;
+  --border-color: #ccc;
+  --card-color: #ffffff;
+  --overlay-light: rgba(240, 240, 240, 0.8);
+  --title-form-color: #90a955;
+  --register-color: #808080
+}
