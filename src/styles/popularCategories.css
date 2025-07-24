@@ -3,12 +3,12 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  background-color: #EEF4EF;
+  background-color: var(--bg-color);
   padding: 3rem;
 }
 
 .popular-categories-section > h2{
-  color: #31572C;
+  color: var(--primary-color);
   font-size: 2.5rem;
 }
 
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: #4F772D;
+  background-color: var(--light-green);
   padding: 3rem;
   gap: 5rem;
   width: 100%;

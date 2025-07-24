@@ -14,15 +14,14 @@
   background-color: var(--bg-color);
 }
 
-.product-image > img{
+.product-image > img {
   width: 80%;
   transition: ease 0.3s transform;
 }
 
-.product-image >img:hover{
-  transform: scale(1.010);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.244);
-
+.product-image > img:hover {
+  transform: scale(1.01);
+  box-shadow: var(--shadow-sm);
 }
 
 .product-information {

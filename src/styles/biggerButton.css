@@ -16,5 +16,5 @@
   transform: scale(1.050);
   color: var(--primary-color);
   background-color: var(--bg-color);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.545);
+  box-shadow: var(--shadow-sm);
 }
