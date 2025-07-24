@@ -1,0 +1,42 @@
+.call-section{
+  display: flex;
+  justify-content: center;
+  background-image: url('../assets/background-hero-section.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 2rem;
+}
+
+.last-call-container{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--bg-color);
+  max-width: 800px;
+  width: 100%;
+  padding: 2rem;
+}
+
+.call-section-image{
+}
+
+.call-section-image > img{
+  width: 35rem;
+}
+
+.call-section-message{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.call-section-message > h2{
+  font-size: 2.5rem;
+  color: var(--dark-green);
+}
+
+.call-section-message > p {
+  font-size: 1.5rem;
+  color:var(--primary-color) ;
+}
