@@ -1,0 +1,48 @@
+.card-product {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background-color: var(--card-color);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.product-image {
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+
+.product-image > img{
+  width: 80%;
+  transition: ease 0.3s transform;
+}
+
+.product-image >img:hover{
+  transform: scale(1.010);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.244);
+
+}
+
+.product-information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.productName {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.locationProduct {
+  font-size: 1.2rem;
+}
+.productState {
+  font-size: 1rem;
+  opacity: 80%;
+}
+.product-actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
