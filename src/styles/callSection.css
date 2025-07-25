@@ -1,0 +1,63 @@
+.call-section {
+  display: flex;
+  justify-content: center;
+  background-image: url("../assets/background-call-section.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 2rem;
+  position: relative;
+}
+
+.call-section::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  z-index: 1;
+  background-color: var(--text-color-black);
+  opacity: 30%;
+}
+
+.last-call-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--bg-color);
+  max-width: 800px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+}
+
+.call-section-image > img {
+  width: 35rem;
+}
+
+.call-section-message {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.call-section-message > h2 {
+  font-size: 2.5rem;
+  color: var(--dark-green);
+}
+
+.call-section-message > p {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+@media (max-width: 676px) {
+  .last-call-container {
+    flex-direction: column;
+  }
+  .call-section-message{
+    align-items: center;
+  }
+}

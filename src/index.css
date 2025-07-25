@@ -18,5 +18,34 @@
 ;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-size: 62.5%; /* 10px */
+  font-family: "Lexend", sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--bg-color); 
+  border-radius: 10px;
+  border: 2px solid var(--border-color);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+>>>>>>> main
