@@ -38,3 +38,12 @@
   font-size: 1.5rem;
   color: var(--primary-color);
 }
+
+@media (max-width: 676px) {
+  .last-call-container {
+    flex-direction: column;
+  }
+  .call-section-message{
+    align-items: center;
+  }
+}
