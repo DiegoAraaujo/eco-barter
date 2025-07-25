@@ -12,10 +12,14 @@
 
 .hero-section::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   content: "";
   z-index: 1;
+  background-color: var(--text-color-black);
+  opacity: 30%;
 }
 
 .hero-section-title {
@@ -31,9 +35,9 @@
 
 .hero-section-title > h1 {
   font-size: 3rem;
-  color: var(--primary-color);
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
+  color: var(--light-green);
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
 }
 
 .hero-section-title > p {

@@ -14,8 +14,8 @@
 
 .popular-categories-list{
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   background-color: var(--light-green);
   padding: 3rem;
   gap: 5rem;

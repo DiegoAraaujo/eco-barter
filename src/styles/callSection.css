@@ -6,6 +6,19 @@
   background-size: cover;
   background-position: center;
   padding: 3rem 2rem;
+  position: relative;
+}
+
+.call-section::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  z-index: 1;
+  background-color: var(--text-color-black);
+  opacity: 30%;
 }
 
 .last-call-container {
@@ -17,6 +30,7 @@
   width: 100%;
   padding: 2rem;
   box-shadow: var(--shadow-md);
+  z-index: 2;
 }
 
 .call-section-image > img {
