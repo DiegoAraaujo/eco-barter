@@ -66,7 +66,7 @@ function PopularCategories() {
         />
         <LovedCategoryCard
           category="Livros"
-          image={ClothingIcon}
+          image={BookIcon}
           imageDescription="ícone de um livro"
         />
       </div>
