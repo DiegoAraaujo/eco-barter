@@ -2,11 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: var(--card-color);
   padding:  1rem;
   border-radius: 15px;
   gap: 1rem;
   transition: ease 0.3s transform;
+  max-width: 15rem;
+  width: 100%;
+  text-align: center;
 }
 
 .category:hover{
@@ -15,11 +19,11 @@
 }
 
 .category > img{
-  height: 80px;
+  height: 70px;
 }
 
 .category > p{
   color: var(--text-color-black);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
