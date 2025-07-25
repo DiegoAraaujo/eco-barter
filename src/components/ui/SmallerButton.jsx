@@ -1,4 +1,4 @@
-import "../styles/smallerButton.css"
+import "../../styles/smallerButton.css"
 
 function smallerButton({ buttontype, buttonMessage }) {
   return ( 

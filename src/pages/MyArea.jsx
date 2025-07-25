@@ -2,15 +2,18 @@ import ImgCamiseta from "../assets/camiseta.png";
 import ImgDisco from "../assets/disco.png";
 import ImgLiqui from "../assets/Liqui.png";
 import ImgLivro from "../assets/livro.png";
+import Footer from "../components/layout/Footer";
+import Header from "../components/layout/Header";
 
 import CardMyProduct from "../components/ui/CardMyProduct";
-import "../components/styles/myArea.css";
+import "../styles/myArea.css";
 import SmallerButton from '../components/ui/SmallerButton'
 
 function MyArea () {
     return(
         <>
         <main>
+<Header />
         <h1> Minha Área</h1>
         <section className="items-section">
               <div className="items-wrapper">
@@ -75,14 +78,14 @@ function MyArea () {
         
         
             
- 
+
       
 </div>
        </div>
           
         
         </section>
-
+ <Footer />
         </main>
         </>
 

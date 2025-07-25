@@ -1,4 +1,4 @@
-import "../../components/styles/cardMyProduct.css";
+import "../../styles/cardMyProduct.css";
 
 //import BiggerButton from "../ui/BiggerButton";
 //import SmallerButton from "../ui/SmallerButton";
