@@ -1,0 +1,108 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 1000;
+
+  background-color: var(--primary-color);
+  color: var(--card-color);
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.nav-left img {
+  height: 3.75rem; /* 60px */
+  padding-left: 1rem;
+}
+
+.nav-right {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.2rem;
+  padding-right: 1rem;
+}
+
+.nav-right a {
+  color: var(--card-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.25rem 0;
+  transition: border-bottom 0.3s ease;
+}
+
+.nav-right a:hover {
+  border-bottom: 0.125rem solid rgba(255, 255, 255, 0.4);
+}
+
+.nav-right a.active {
+  border-bottom: 0.125rem solid var(--footer-color);
+}
+
+/* BOTÃO DE MENU HAMBÚRGUER */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--card-color);
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 425px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .nav-left {
+    margin-bottom: 0.5rem;
+    padding-left: 0;
+  }
+
+  .nav-left img {
+    height: 2.5rem; /* 40px */
+  }
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 20px;
+  }
+
+  .nav-right {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 60px; 
+    left: 0;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-right.ativo {
+    display: flex;
+  }
+
+  .nav-right a {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    text-align: center;
+  }
+}
