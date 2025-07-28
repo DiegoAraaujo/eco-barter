@@ -8,10 +8,9 @@
   border-radius: 15px;
   gap: 1rem;
   transition: ease 0.3s transform;
-  max-width: 12rem;
-  width: 100%;
+  width: 11rem;
+  flex-shrink: 0;
   text-align: center;
-  scroll-snap-align: start;
 }
 
 .category:hover {
