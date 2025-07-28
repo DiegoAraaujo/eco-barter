@@ -1,45 +1,20 @@
 .container-padrao {
+  /* background-color: var(--card-color); */
   width: 100%;
-  max-width: 1200px; 
+  max-width: 90rem; 
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 100px);
-  overflow: hidden;
-}
-
-@media (max-width: 992px) {
-  .container-padrao {
-    padding: 1.75rem;
-  }
 }
 
 @media (max-width: 768px) {
   .container-padrao {
-    padding: 1.5rem;
-    max-width: 100%;
-  }
-  
-  .container-padrao.form-container {
-    padding: 1rem;
+    padding: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
   .container-padrao {
-    padding: 1.25rem;
-  }
-  
-  .container-padrao.compact,
-  .container-padrao.form-container {
     padding: 1rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .container-padrao {
-    scroll-behavior: auto;
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import '../../styles/components/layout/RootLayout.css';
 
 const RootLayout = () => {
   return (
@@ -9,13 +10,10 @@ const RootLayout = () => {
       <Header />
 
       <main
-        className="main-content"
         id="conteudo-principal"
+        className="main-content"
         role="main"
-        style={{
-          paddingTop: '60px',     // altura do Header
-          paddingBottom: '40px',  // altura do Footer
-        }}
+        tabIndex="-1" 
       >
         <Outlet />
       </main>

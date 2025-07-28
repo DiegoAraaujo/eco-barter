@@ -3,26 +3,33 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 60px;
   z-index: 1000;
 
   background-color: var(--primary-color);
   color: var(--card-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.header-container {
+  max-width: 1440px; 
+  margin: 0 auto;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
+  height: 100%;
 }
 
 .nav-left img {
-  height: 3.75rem; /* 60px */
+  height: 5rem;
   padding-left: 1rem;
 }
 
 .nav-right {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
   font-size: 1.2rem;
   padding-right: 1rem;
@@ -31,20 +38,19 @@ header {
 .nav-right a {
   color: var(--card-color);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   padding: 0.25rem 0;
   transition: border-bottom 0.3s ease;
 }
 
 .nav-right a:hover {
-  border-bottom: 0.125rem solid rgba(255, 255, 255, 0.4);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 }
 
 .nav-right a.active {
-  border-bottom: 0.125rem solid var(--footer-color);
+  border-bottom: 2px solid var(--footer-color);
 }
 
-/* BOTÃO DE MENU HAMBÚRGUER */
 .menu-toggle {
   display: none;
   background: none;
@@ -52,31 +58,35 @@ header {
   color: var(--card-color);
   font-size: 2rem;
   cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 20px;
   z-index: 1001;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   header {
+    height: auto;
+    padding: 0;
+  }
+
+  .header-container {
     flex-direction: column;
     align-items: flex-start;
-    height: auto;
     padding: 1rem;
-  }
-
-  .nav-left {
-    margin-bottom: 0.5rem;
-    padding-left: 0;
-  }
-
-  .nav-left img {
-    height: 2.5rem; /* 40px */
   }
 
   .menu-toggle {
     display: block;
-    position: absolute;
-    top: 12px;
-    right: 20px;
+  }
+
+  .nav-left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
   }
 
   .nav-right {
@@ -87,7 +97,7 @@ header {
     width: 100%;
     background-color: var(--primary-color);
     position: absolute;
-    top: 60px; 
+    top: 60px;
     left: 0;
     padding: 1rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -99,10 +109,22 @@ header {
   }
 
   .nav-right a {
-    padding: 0.5rem 0;
-    font-size: 0.95rem;
+    padding: 0.75rem 0;
+    font-size: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (min-width: 1920px) {
+  .header-container {
+    max-width: 1600px;
+    padding: 0 4rem;
+  }
+
+  .nav-right {
+    font-size: 1.4rem;
+    gap: 2rem;
   }
 }

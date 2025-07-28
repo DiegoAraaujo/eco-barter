@@ -1,25 +1,27 @@
 .footer {
-  position: fixed; 
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 5rem; 
+  height: 40px;
   background-color: var(--footer-color);
   color: var(--text-color-black);
   text-align: center;
   padding: 0 1rem;
   font-size: 1rem;
+  font-weight: 500;
   border-top: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 1000;
   box-sizing: border-box;
+  line-height: 1;
 }
 
 @media (max-width: 768px) {
   .footer {
-    font-size: 0.8125rem; /* 13px */
-    padding: 0 0.8rem;
+    font-size: 0.875rem; 
+    padding: 0 0.75rem;
   }
 }
