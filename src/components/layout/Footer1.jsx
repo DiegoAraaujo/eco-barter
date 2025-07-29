@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../styles/components/layout/Footer.css';
+import '../../styles/components/layout/Footer1.css';
 
-const Footer = () => {
+const Footer1 = () => {
   return (
     <footer role="contentinfo" className="footer">
       <p>EcoBarter — Conectando pessoas por meio de trocas conscientes.</p>
@@ -9,4 +9,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer1;
