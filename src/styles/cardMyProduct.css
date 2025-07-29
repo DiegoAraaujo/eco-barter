@@ -1,0 +1,49 @@
+.card-my-product {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  background-color: var(--card-color );
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.my-product-image {
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+
+.my-product-image > img{
+  width: 80%;
+  transition: ease 0.3s transform;
+}
+
+.my-product-image >img:hover{
+  transform: scale(1.100);
+    box-shadow: 0 5px 10px var( --shadow-sm);
+
+}
+
+.my-product-information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.my-productName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom:0;
+}
+
+.productState {
+  font-size: 1rem;
+  opacity: 80%;
+  margin-top: 0;
+}
+.my-productCategory{
+  margin-top: 0;
+    font-size: 1rem;
+  opacity: 80%;
+}

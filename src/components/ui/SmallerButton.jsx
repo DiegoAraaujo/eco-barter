@@ -1,4 +1,6 @@
-import '../../styles/smallerButton.css'
+
+import "../../styles/smallerButton.css"
+
 
 function smallerButton({ buttontype, buttonMessage }) {
   return ( 
@@ -8,4 +10,7 @@ function smallerButton({ buttontype, buttonMessage }) {
 );
 }
 
+
 export default smallerButton;
+
+
