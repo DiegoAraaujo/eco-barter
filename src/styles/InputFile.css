@@ -1,0 +1,41 @@
+/*Input-File*/
+.inputfile-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 0.5rem;
+}
+
+.inputfile-label {
+    background-color: var(--primary-color);
+    color: var(--text-color-white);
+    padding: 1.3rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    width: auto;
+    text-align: center;
+}
+
+.inputfile-label:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.1rem var(--primary-color);
+}
+
+.inputfile-label input[type="file"] {
+    display: none;
+}
+
+
+.preview-image {
+    max-width: 40%;
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+.preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.2rem;
+}
