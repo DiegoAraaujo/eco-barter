@@ -8,16 +8,26 @@ const RootLayout = () => {
   return (
     <div className="root-layout">
       <Header1 />
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 20300d1c254b49074defb42414083bb6556da0db
       <main
         id="conteudo-principal"
         className="main-content"
         role="main"
+<<<<<<< HEAD
         tabIndex="-1"
       >
         <div className="content-container">
           <Outlet />
         </div>
+=======
+        tabIndex="-1" 
+      >
+        <Outlet />
+>>>>>>> 20300d1c254b49074defb42414083bb6556da0db
       </main>
 
       <Footer1 />

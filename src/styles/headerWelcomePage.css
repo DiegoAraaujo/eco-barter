@@ -6,6 +6,10 @@
   background-color: var(--dark-green);
 }
 
+.header-welcome-page img{
+  width: 12rem;
+}
+
 .header-welcome-actions {
   display: flex;
   gap: 2rem;
