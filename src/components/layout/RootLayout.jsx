@@ -8,14 +8,16 @@ const RootLayout = () => {
   return (
     <div className="root-layout">
       <Header1 />
-
+      
       <main
         id="conteudo-principal"
         className="main-content"
         role="main"
-        tabIndex="-1" 
+        tabIndex="-1"
       >
-        <Outlet />
+        <div className="content-container">
+          <Outlet />
+        </div>
       </main>
 
       <Footer1 />

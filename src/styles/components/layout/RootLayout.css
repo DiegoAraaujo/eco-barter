@@ -31,7 +31,92 @@
 @media (max-width: 768px) {
   .main-content {
     padding: 7rem 1.25rem 3.5rem;
+  }:root {
+  --bg-color: #ffffff; /* Default light theme */
+  --text-color-black: #333333;
+  --content-max-width: 1440px;
+  --mobile-breakpoint: 576px;
+  --tablet-breakpoint: 768px;
+  --desktop-breakpoint: 992px;
+  --large-desktop-breakpoint: 1600px;
+}
+
+.root-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color-black);
+  position: relative; /* For absolute positioned children */
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 6.5rem 2rem 4.5rem;
+  box-sizing: border-box;
+  
+  /* Accessibility improvements */
+  outline: none; /* Remove default outline as we handle focus elsewhere */
+}
+
+/* Content focus for keyboard navigation */
+.main-content:focus-visible {
+  outline: 2px solid var(--text-color-black);
+  outline-offset: -2px;
+}
+
+/* Large desktop screens (1600px and up) */
+@media (min-width: 1600px) {
+  .main-content {
+    padding: 7rem 3rem 5rem;
   }
+}
+
+/* Standard desktop (992px - 1599px) - Default styles cover this range */
+
+/* Tablet landscape (768px - 991px) */
+@media (max-width: 992px) {
+  .main-content {
+    padding: 6rem 1.75rem 4rem;
+  }
+}
+
+/* Tablet portrait (576px - 767px) */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 7rem 1.25rem 3.5rem;
+  }
+}
+
+/* Mobile devices (up to 575px) */
+@media (max-width: 576px) {
+  .main-content {
+    padding: 6.5rem 1rem 3rem;
+    
+    /* Improve touch targets */
+    --min-tap-size: 48px;
+    
+    /* Ensure content isn't too narrow */
+    min-width: 320px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .root-layout {
+    background-color: transparent;
+    min-height: auto;
+  }
+  
+  .main-content {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+}
 }
 
 @media (max-width: 576px) {

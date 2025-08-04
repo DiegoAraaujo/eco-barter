@@ -10,39 +10,42 @@ const ItemDetails = () => {
   const { id } = useParams();
   const itemData = getItemById(id);
 
+  // Conteúdo para item não encontrado
   if (!itemData) {
     return (
       <Container className="item-not-found-container">
-        <main className="item-details">
-          <PageTitle>Item não encontrado</PageTitle>
-          <div className="voltar-container">
-            <Link to="/" className="btn-link">
-              <ButtonLarge type="button">Voltar</ButtonLarge>
-            </Link>
-          </div>
-        </main>
+        <PageTitle aria-live="assertive">Item não encontrado</PageTitle>
+        <div className="voltar-container">
+          <Link to="/" className="btn-link" aria-label="Voltar para página inicial">
+            <ButtonLarge type="button">Voltar</ButtonLarge>
+          </Link>
+        </div>
       </Container>
     );
   }
 
+  // Conteúdo para item encontrado
   return (
     <Container>
-      <main className="item-details">
+      <article className="item-details" aria-labelledby="titulo-item">
         <PageTitle className="item-details__title" id="titulo-item">
           {itemData.title}
         </PageTitle>
 
         <div className="detalhes-container">
-          <div className="imagem-item">
+          <figure className="imagem-item">
             <img
               src={itemData.image}
               alt={`Imagem do item ${itemData.title}`}
-              aria-label="Imagem do item"
               loading="lazy"
+              width="400"
+              height="400"
             />
-          </div>
+          </figure>
 
-          <section className="detalhes-box" aria-label="Informações do item">
+          <section className="detalhes-box" aria-labelledby="info-item">
+            <h2 id="info-item" className="visually-hidden">Informações do item</h2>
+            
             <div className="detalhes-item">
               <p><strong>Categoria:</strong> {itemData.category}</p>
               <p><strong>Cidade:</strong> {itemData.city}</p>
@@ -50,7 +53,7 @@ const ItemDetails = () => {
             </div>
 
             <div className="descricao-item">
-              <p><strong>Descrição:</strong></p>
+              <h3>Descrição</h3>
               <p>{itemData.description}</p>
             </div>
 
@@ -58,7 +61,7 @@ const ItemDetails = () => {
               <ButtonLarge
                 className="btn-troca"
                 type="button"
-                aria-label="Propor troca do item"
+                aria-label={`Propor troca para o item ${itemData.title}`}
               >
                 Propor troca
               </ButtonLarge>
@@ -67,11 +70,11 @@ const ItemDetails = () => {
         </div>
 
         <div className="voltar-container">
-          <Link to="/" className="btn-link" aria-label="Voltar para a página anterior">
+          <Link to="/" className="btn-link" aria-label="Voltar para página inicial">
             <ButtonLarge type="button">Voltar</ButtonLarge>
           </Link>
         </div>
-      </main>
+      </article>
     </Container>
   );
 };
