@@ -2,6 +2,7 @@
 
 :root {
   --primary-color: #31572c;
+  --primary-hover: #264a22;
   --form-color: #e7ece8;
   --dark-green: #132a13;
   --light-green: #4F772D;
@@ -13,9 +14,13 @@
   --title-form-color: #90a955;
   --text-color-black: black;
   --text-color-white: white;
-  --shadow-sm:0 5px 10px rgba(0, 0, 0, 0.373);
+  --text-color-green: #1e3e1e;
+  --waiting-status: #ffa500;
+  --accepted-status: #008000;
+  --rejected-status: #ff0000;
+  --shadow-sm: 0 5px 10px rgba(0, 0, 0, 0.373);
   --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.577);
-;
+  ;
 }
 
 
@@ -27,7 +32,7 @@
 
 body,
 html {
-  font-size: 62.5%; /* 10px */
+  font-size: 62.5%;  /* 10px */
   font-family: "Lexend", sans-serif;
 }
 
@@ -40,7 +45,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--bg-color); 
+  background-color: var(--bg-color);
   border-radius: 10px;
   border: 2px solid var(--border-color);
 }
@@ -48,4 +53,3 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
   background-color: var(--primary-color);
 }
-

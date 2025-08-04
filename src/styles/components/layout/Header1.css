@@ -1,0 +1,130 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1000;
+
+  background-color: var(--primary-color);
+  color: var(--card-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.header-container {
+  max-width: 1440px; 
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-left img {
+  height: 5rem;
+  padding-left: 1rem;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.2rem;
+  padding-right: 1rem;
+}
+
+.nav-right a {
+  color: var(--card-color);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.25rem 0;
+  transition: border-bottom 0.3s ease;
+}
+
+.nav-right a:hover {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.nav-right a.active {
+  border-bottom: 2px solid var(--footer-color);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--card-color);
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  z-index: 1001;
+}
+
+@media (max-width: 768px) {
+  header {
+    height: auto;
+    padding: 0;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-right {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-right.ativo {
+    display: flex;
+  }
+
+  .nav-right a {
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1920px) {
+  .header-container {
+    max-width: 1600px;
+    padding: 0 4rem;
+  }
+
+  .nav-right {
+    font-size: 1.4rem;
+    gap: 2rem;
+  }
+}

@@ -34,6 +34,7 @@
 
 .popular-categories-list {
   display: flex;
+  justify-content: center;
   background-color: var(--light-green);
   padding: 3rem;
   overflow-x: auto;
@@ -42,9 +43,37 @@
   -ms-overflow-style: none;
   gap: 1rem;
   flex: 1;
-  scroll-snap-type: x mandatory;
 }
 
 .popular-categories-list::-webkit-scrollbar {
   display: none;
+}
+
+.mobile-arrow {
+  display: none;
+}
+
+@media (max-width: 676px) {
+
+  .popular-categories-container{
+    flex-direction: column;
+  }
+  .mobile-arrow {
+    display: block;
+  }
+
+  .desktop-arrow {
+    display: none;
+  }
+
+  .category-arrow-button{
+    justify-content: center;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 1422px) {
+  .popular-categories-list{
+    justify-content: flex-start;
+  }
 }
