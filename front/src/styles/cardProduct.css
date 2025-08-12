@@ -6,6 +6,7 @@
   background-color: var(--card-color);
   padding: 1rem;
   border-radius: 10px;
+  max-width: 25rem;
 }
 
 .product-image {
@@ -15,7 +16,7 @@
 }
 
 .product-image > img {
-  width: 80%;
+  height: 15rem;
   transition: ease 0.3s transform;
 }
 
@@ -42,6 +43,5 @@
 }
 .product-actions {
   display: flex;
-  justify-content: center;
   gap: 2rem;
 }
