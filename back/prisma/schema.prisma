@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ItemStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+}
+
+enum ItemCondition {
+  NEW
+  USED
+  REFURBISHED
+}
+
+enum ExchangeStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  COMPLETED
+}
+
+model Account {
+  id  Int   @id   @default(autoincrement())
+  name  String?
+  email String?   @unique
+  registeredAt DateTime?
+  passwordHash String?
+  fullName  String?
+  phone String?
+  city  String?
+  state String?
+
+  items Item[]  @relation("AccountItems")
+  
+  sentExchanges Exchange[] @relation("ExchangeSender")
+
+  recExchanges Exchange[] @relation("ExchangeReceiver")
+}
+
+model Item {
+  id  Int @id @default(autoincrement())
+  accountId Int
+  name  String?
+  registeredAt DateTime?
+  imageUrl  String?
+  category  String?
+  description String?
+  status  ItemStatus?
+  condition  ItemCondition?
+
+  account Account @relation("AccountItems", fields: [accountId], references: [id])
+
+  sentExchanges Exchange[] @relation("ItemSender")
+
+  recExchanges Exchange[] @relation("ItemReceiver")
+}
+
+model Exchange {
+  id  Int @id @default(autoincrement())
+  senderItemId  Int
+  receiverItemId  Int
+  senderAccountId Int
+  receiverAccountId Int
+  exchangedAt DateTime?
+  status  ExchangeStatus?
+
+  senderItem  Item  @relation("ItemSender", fields: [senderItemId], references: [id])
+
+  receiverItem  Item  @relation("ItemReceiver", fields: [receiverItemId], references: [id])
+
+  senderAccount Account @relation("ExchangeSender", fields: [senderAccountId], references: [id])
+
+  receiverAccount Account @relation("ExchangeReceiver", fields: [receiverAccountId], references: [id])
+
+  reviews ExchangeReview[]
+}
+
+model ExchangeReview {
+  id  Int @id @default(autoincrement())
+  exchangeId  Int
+  rating  Int?
+  comment String?
+
+  exchange  Exchange  @relation(fields: [exchangeId], references: [id])
+}
