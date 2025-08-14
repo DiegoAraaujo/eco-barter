@@ -1,0 +1,9 @@
+.headerLogin {
+  background-color: var(--primary-color);
+  width: 100%;
+}
+
+.headerLogin img {
+  width: 14rem;
+  padding-left: 4rem;
+}
