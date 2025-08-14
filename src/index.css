@@ -1,23 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap");
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
- }
- body, html{
-  font-size: 62.5%; /* 10px */
-  font-family: 'Lexend', sans-serif;
- }
- :root {
-  --primary-color: #31572C;
-  --form-color:#E7ECE8;
-  --dark-green:#132A13;
-  --footer-color: #ECF39E;
+:root {
+  --primary-color: #31572c;
+  --form-color: #e7ece8;
+  --dark-green: #132a13;
+  --light-green: #4F772D;
+  --footer-color: #ecf39e;
   --bg-color: #eef4ef;
   --border-color: #ccc;
   --card-color: #ffffff;
   --overlay-light: rgba(240, 240, 240, 0.8);
   --title-form-color: #90a955;
+  --text-color-black: black;
+  --text-color-white: white;
   --register-color: #808080
+  --shadow-sm:0 5px 10px rgba(0, 0, 0, 0.373);
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.577);
+;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-size: 62.5%; /* 10px */
+  font-family: "Lexend", sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--bg-color); 
+  border-radius: 10px;
+  border: 2px solid var(--border-color);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
 }

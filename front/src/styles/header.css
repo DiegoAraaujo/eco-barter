@@ -1,0 +1,15 @@
+.header-top {
+  background-color: var(--primary-color);
+  width: 100%;
+}
+
+.header-top img {
+  width: 14rem;
+  padding-left: 4rem;
+}
+.header-buttons{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;
+}

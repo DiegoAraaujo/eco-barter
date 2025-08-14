@@ -1,12 +1,22 @@
-import Login from "./pages/login";
+import './App.css'
+
+import MyArea from './pages/myArea';
+
+import WelcomePage from './pages/WelcomePage';
 
 function App() {
 
   return (
-    <>
-      <Login />
-    </>
-  );
+   <>
+
+ 
+   <MyArea />
+   
+
+   <WelcomePage></WelcomePage>
+
+   </>
+  )
 }
 
-export default App
+export default App;
