@@ -34,14 +34,14 @@ const getUsuarioByIdHandler = async(req, res) => {
 }
 const addUsuarioHandler = async(req, res) => {
 
-    const{ nome, fullName, email, phone, city, state} = req.body;
+    const{ nome, fullName, email, phone, city, state,  passwordHash} = req.body;
 
     if(!nome){
         return res.status(400).json({error: "Nome é obrigatório"});
     }
 
     try{
-        const account = await addUsuario( nome, fullName, email, phone, city, state);
+        const account = await addUsuario( nome, fullName, email, phone, city, state,  passwordHash);
         res.status(201).json(account);
     }
 
@@ -54,14 +54,14 @@ const updateUsuarioHandler = async(req, res) => {
 
     const id = parseInt(req.params.id);
 
-    const{ nome, fullName, email, phone, city, state } = req.body;
+    const{ nome, fullName, email, phone, city, state, passwordHash } = req.body;
 
     if(!nome){
         return res.status(400).json({error: "Nome é obrigatório"});
     }
 
     try{
-        const account  = await updateUsuario(id, nome, fullName, email, phone, city, state);
+        const account  = await updateUsuario(id, nome, fullName, email, phone, city, state,  passwordHash);
 
         res.status(200).json(account);
     }

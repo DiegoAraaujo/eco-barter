@@ -10,6 +10,7 @@ const selectPublic = {
   phone: true,
   city: true,
   state: true,
+   passwordHash: true,
 };
 
 const getAllUsuarios = async() => {
@@ -29,7 +30,7 @@ const getUsuarioById = async(id) => {
     });
 }
 
-const addUsuario = async(nome, fullName, email, phone, city, state ) => {
+const addUsuario = async(nome, fullName, email, phone, city, state,  passwordHash ) => {
     return prisma.account.create({
         data:{
             name: nome,
@@ -39,11 +40,12 @@ const addUsuario = async(nome, fullName, email, phone, city, state ) => {
             city: city,
             state: state,
             registeredAt: new Date(),
+             passwordHash:  passwordHash,
             }, 
             select: selectPublic,
     });
 }
-   const updateUsuario = async(id, nome, fullName, email, phone, city, state) => {    
+   const updateUsuario = async(id, nome, fullName, email, phone, city, state,  passwordHash) => {    
     const usuario = await prisma.account.findUnique({
         where: {
             id: Number(id)
@@ -64,6 +66,7 @@ const addUsuario = async(nome, fullName, email, phone, city, state ) => {
             phone: phone,
             city: city,
             state: state,
+             passwordHash:  passwordHash,
             
         },
         select: selectPublic,
