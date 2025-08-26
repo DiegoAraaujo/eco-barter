@@ -1,0 +1,54 @@
+/* ==========================
+   RootLayout.css (sem aside)
+   ========================== */
+
+.root-layout {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+  background: var(--bg-color);
+  color: var(--text-color-black);
+}
+@supports (height: 100svh) {
+  .root-layout { min-block-size: 100svh; }
+}
+
+/* Faixa central entre Header e Footer.
+   Use <Container /> nas páginas que quiserem centralizar. */
+.main-content {
+  flex: 1 1 auto;
+  inline-size: 100%;
+  /* altura útil descontando header/footer */
+  min-block-size: calc(100dvh - var(--header-height) - var(--footer-height));
+  padding: 0;
+  margin: 0;
+}
+@supports (height: 100svh) {
+  .main-content {
+    min-block-size: calc(100svh - var(--header-height) - var(--footer-height));
+  }
+}
+
+/* Quando Header/Footer forem FIXED: cria “almofada” para não cobrir conteúdo */
+.main-content.with-fixed-chrome {
+  padding-block: var(--header-height) var(--footer-height);
+  min-block-size: 100dvh;
+}
+@supports (height: 100svh) {
+  .main-content.with-fixed-chrome { min-block-size: 100svh; }
+}
+
+/* Variante opcional: gutters laterais globais (sem usar <Container />) */
+.main-content.with-gutters {
+  padding-inline-start: max(var(--page-gutter-x), env(safe-area-inset-left));
+  padding-inline-end:   max(var(--page-gutter-x), env(safe-area-inset-right));
+}
+
+/* Compensa âncoras/links internos pela altura do Header */
+.main-content :where(h1, h2, h3, section, [id]) {
+  scroll-margin-top: var(--header-height);
+}
+
+/* Observações:
+   - Utilitários de full-bleed e acessibilidade já estão no index.css.
+   - Evite definir overflow aqui; trate em cada seção/componente quando necessário. */

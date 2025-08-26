@@ -1,0 +1,192 @@
+/* ==========================
+   Login.css (sem aside, cozy 44px inputs)
+   ========================== */
+
+/* ===== Fundo aplicado no layout quando a rota é /login ===== */
+@supports selector(:has(*)) {
+  .auth-layout:has(.login-page) {
+    background:
+      linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.15) 40%, rgba(0,0,0,0) 100%),
+      url("/assets/backgrounds/background-call-section.svg") center / cover no-repeat;
+  }
+  .auth-layout:has(.login-page) .login-page {
+    background: none;
+    margin-block: 0;
+    padding-block: 0; /* removido o excesso do topo */
+  }
+}
+
+/* ===== Wrapper full-bleed ===== */
+.login-page {
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+
+  /* full-bleed horizontal */
+  inline-size: 100vw;
+  margin-inline: calc(50% - 50vw);
+  overflow: hidden;
+  scrollbar-gutter: stable both-edges;
+  contain: paint;
+
+  /* centralização do conteúdo */
+  display: grid;
+  place-items: center;
+
+  /* compensação da largura da scrollbar */
+  padding-inline: max(0px, calc((100vw - 100%) / 2));
+
+  /* centralização vertical total */
+  padding-block: 0;
+}
+
+@supports not selector(:has(*)) {
+  /* fallback: fundo aplicado direto no wrapper */
+  .login-page {
+    background:
+      linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.15) 40%, rgba(0,0,0,0) 100%),
+      url("/assets/backgrounds/background-call-section.svg") center / cover no-repeat;
+    padding-block: 0;
+  }
+}
+
+@supports (height: 100svh) {
+  .login-page { min-block-size: 100svh; }
+}
+
+/* ===== Caixa central com formulário ===== */
+.login-box {
+  inline-size: clamp(36rem, 46vw, 44rem);
+  margin: 0 auto;
+  background: var(--card-color);
+  color: var(--text-color-black);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: clamp(1.25rem, 1.8vw, 2.2rem);
+  max-block-size: min(86svh, 760px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: 16px;
+}
+
+@supports (height: 100svh) {
+  .login-box { max-block-size: min(86svh, 760px); }
+}
+
+/* ===== Logo ===== */
+.login-logo {
+  display: flex;
+  justify-content: center;
+  margin-block-end: .75rem;
+}
+.login-logo img {
+  inline-size: 140px;
+  max-inline-size: 100%;
+}
+@media (max-width: 480px) {
+  .login-logo img { inline-size: 120px; }
+}
+
+/* ===== Formulário ===== */
+.login-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.login-form .page-title,
+.login-form h1,
+.login-form h2 {
+  text-align: center;
+  margin-block-end: .2rem;
+  font-size: clamp(1.9rem, 1.2rem + 1vw, 2.4rem);
+  letter-spacing: -0.01em;
+}
+
+.field { display: grid; gap: .5rem; }
+
+/* Inputs */
+.login-form input[type="email"],
+.login-form input[type="password"],
+.login-form input[type="text"] {
+  inline-size: 100%;
+  block-size: 44px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding-inline: .9rem;
+  font-size: .95rem;
+  background: #fff;
+  color: var(--text-color-black);
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.login-form input::placeholder { color: #9ca3af; }
+.login-form input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(49,87,44,.18);
+}
+
+/* Mostrar/ocultar senha */
+.pwd-wrap { position: relative; display: grid; }
+.pwd-toggle {
+  position: absolute;
+  inset-inline-end: .5rem;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: .85rem;
+  padding: .2rem .45rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--light-green);
+}
+.pwd-toggle:hover { text-decoration: underline; }
+
+/* Erros */
+.field-error {
+  color: #b91c1c;
+  font-size: .95rem;
+  line-height: 1.35;
+}
+[aria-invalid="true"] {
+  border-color: #ef4444 !important;
+  background-color: #fff7f7;
+}
+
+/* Botão submit */
+.login-submit {
+  inline-size: 100%;
+  block-size: 44px;
+  margin-block-start: .5rem;
+}
+.login-submit:disabled { opacity: .8; cursor: not-allowed; }
+
+/* Extra */
+.login-extra {
+  margin-block-start: .75rem;
+  text-align: center;
+}
+.extra-link {
+  color: var(--light-green);
+  font-weight: 600;
+  font-size: .95rem;
+}
+.extra-link:hover { text-decoration: underline; }
+
+/* Acessibilidade */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  block-size: 1px; inline-size: 1px;
+  overflow: hidden; clip: rect(1px,1px,1px,1px);
+  white-space: nowrap;
+}
+
+/* Menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .login-box { padding: 1.1rem; border-radius: 14px; }
+}
