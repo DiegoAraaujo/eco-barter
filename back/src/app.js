@@ -1,19 +1,19 @@
-const express = require('express');
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+
+import usuarioRoutes from "./routes/usuarioRoutes.js";
+
 const app = express();
-const usuarioRoutes = require('./routes/usuarioRoutes');
-
-
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+app.use("/usuarios", usuarioRoutes);
 
-
-app.get('/', (req, res) => {
-    res.send('back');
-});
-
-app.use('/usuarios', usuarioRoutes);
-
-
-
-
-module.exports = app;
+export default app;

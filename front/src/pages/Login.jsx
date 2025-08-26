@@ -1,11 +1,10 @@
 import HeaderLogin from "../components/layout/headerLogin";
-import Footer from "../components/layout/Footer"
-import "../styles/login.css"
-import logo2 from "../assets/logo2.png"
+import Footer from "../components/layout/Footer";
+import "../styles/login.css";
+import logo2 from "../assets/logo2.png";
 import BiggerButton from "../components/ui/BiggerButton";
 
 function Login() {
-
   return (
     <>
       <div className="pageLogin">
@@ -17,9 +16,11 @@ function Login() {
             <form className="formLogin">
               <input type="email" placeholder="Digite seu e-mail" />
               <input type="password" placeholder="Digite sua senha" />
-              <BiggerButton buttonMenssage="Entrar" />
+              <BiggerButton buttontype="submit" buttonMessage="Entrar" />
             </form>
-            <p className="textBottomForm">Ainda não tem conta? <a href="#">Cadastre-se</a></p>
+            <p className="textBottomForm">
+              Ainda não tem conta? <a href="#">Cadastre-se</a>
+            </p>
           </div>
         </main>
         <Footer />

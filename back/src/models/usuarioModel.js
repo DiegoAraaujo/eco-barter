@@ -1,5 +1,4 @@
-const prisma = require('../prisma');
-
+import prisma from "../prisma.js";
 
 const selectPublic = {
   id: true,
@@ -10,90 +9,116 @@ const selectPublic = {
   phone: true,
   city: true,
   state: true,
-   passwordHash: true,
+  passwordHash: true,
 };
 
-const getAllUsuarios = async() => {
-    return prisma.account.findMany({
-        orderBy: {
-            name: 'desc'
-        },
-        select: selectPublic,
-    });
-}
-const getUsuarioById = async(id) => {
-    return prisma.account.findUnique({
-        where: {
-            id: Number(id)
-          },
-          select: selectPublic,
-    });
-}
+export const getAllUsuarios = async () => {
+  return prisma.account.findMany({
+    orderBy: {
+      name: "desc",
+    },
+    select: selectPublic,
+  });
+};
 
-const addUsuario = async(nome, fullName, email, phone, city, state,  passwordHash ) => {
-    return prisma.account.create({
-        data:{
-            name: nome,
-            fullName: fullName,
-            email: email,
-            phone: phone,
-            city: city,
-            state: state,
-            registeredAt: new Date(),
-             passwordHash:  passwordHash,
-            }, 
-            select: selectPublic,
-    });
-}
-   const updateUsuario = async(id, nome, fullName, email, phone, city, state,  passwordHash) => {    
-    const usuario = await prisma.account.findUnique({
-        where: {
-            id: Number(id)
-        }
-    });
-    if(!usuario){
-        throw new Error('Usuário não encontrado');
-    }
-    return prisma.account.update({
-        where: {
-            id: Number(id)
+export const getUsuarioById = async (id) => {
+  return prisma.account.findUnique({
+    where: {
+      id: Number(id),
+    },
+    select: selectPublic,
+  });
+};
 
-        },
-        data: {
-            name: nome,
-            fullName: fullName,
-            email: email,
-            phone: phone,
-            city: city,
-            state: state,
-             passwordHash:  passwordHash,
-            
-        },
-        select: selectPublic,
+export const addUsuario = async (
+  name,
+  fullName,
+  email,
+  phone,
+  city,
+  state,
+  encryptedPassword
+) => {
+  return prisma.account.create({
+    data: {
+      name,
+      fullName,
+      email,
+      phone,
+      city,
+      state,
+      registeredAt: new Date(),
+      passwordHash: encryptedPassword,
+    },
+    select: selectPublic,
+  });
+};
 
-    });
-}
+export const updateUsuario = async (
+  id,
+  nome,
+  fullName,
+  email,
+  phone,
+  city,
+  state,
+  passwordHash
+) => {
+  const usuario = await prisma.account.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
+  if (!usuario) {
+    throw new Error("Usuário não encontrado");
+  }
+  return prisma.account.update({
+    where: {
+      id: Number(id),
+    },
+    data: {
+      name: nome,
+      fullName: fullName,
+      email: email,
+      phone: phone,
+      city: city,
+      state: state,
+      passwordHash: passwordHash,
+    },
+    select: selectPublic,
+  });
+};
 
-const deleteUsuario = async(id) => {
-    const usuario = await prisma.account.findUnique({
-        where:{
-            id: Number(id)
-        }
+export const deleteUsuario = async (id) => {
+  const usuario = await prisma.account.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
+  if (!usuario) {
+    throw new Error("Usuário não encontrado");
+  }
+  return prisma.account.delete({
+    where: {
+      id: Number(id),
+    },
+  });
+};
 
-    });
-    if(!usuario){
-        throw new Error('Usuário não encontrado');
-    }
-    return prisma.account.delete({
-        where: {
-            id: Number(id)
-        }
-    });
-}
-module.exports = {
-    getAllUsuarios,
-    getUsuarioById,
-    addUsuario,
-    updateUsuario,
-    deleteUsuario
+export const getUsuarioByEmail = async (email) => {
+  return prisma.account.findUnique({
+    where: {
+      email: String(email),
+    },
+    select: selectPublic,
+  });
+};
+
+export const userAuth = (email) => {
+  return prisma.account.findUnique({
+    where: {
+      email: String(email),
+    },
+    select: selectPublic,
+  });
 };

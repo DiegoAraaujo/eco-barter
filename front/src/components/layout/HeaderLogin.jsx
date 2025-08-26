@@ -1,5 +1,5 @@
 import logo1 from "../../assets/logo1.png"
-import "../../styles/layout/headerLogin.css"
+import "../../styles/headerLogin.css"
 
 function HeaderLogin () {
 

@@ -1,22 +1,19 @@
-import './App.css'
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import MyArea from './pages/myArea';
-
-import WelcomePage from './pages/WelcomePage';
-
+import WelcomePage from "./pages/WelcomePage";
+import Login from "./pages/Login";
 function App() {
-
   return (
-   <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
 
- 
-   <MyArea />
-   
-
-   <WelcomePage></WelcomePage>
-
-   </>
-  )
+      {/* <MyArea /> */}
+    </BrowserRouter>
+  );
 }
 
 export default App;
