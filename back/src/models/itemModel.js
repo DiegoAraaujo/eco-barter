@@ -1,7 +1,7 @@
 import prisma from "../prisma.js";
 
 const getAllItems = async(accountId) => {
-  return prisma.Item.findMany({
+  return prisma.item.findMany({
     where: {
       accountId: accountId
     },
@@ -12,30 +12,49 @@ const getAllItems = async(accountId) => {
 }
 
 const getItemById = async(id) => {
-  return prisma.Item.findUnique({
+  return prisma.item.findUnique({
     where: {
       id: id
+    },
+    include: {
+      account: true, // Carrega os dados da conta dona do item
+      
+      sentExchanges: { // Histórico de quando o item foi oferecido em trocas
+        include: {
+          receiverItem: true,   // Item que foi recebido em troca
+          receiverAccount: true, // Conta que recebeu este item
+          reviews: true         // Avaliações desta troca
+        }
+      },
+      
+      recExchanges: { // Histórico de quando outros queriam este item em troca
+        include: {
+          senderItem: true,    // Item que foi oferecido em troca
+          senderAccount: true, // Conta que ofereceu o item
+          reviews: true        // Avaliações desta troca
+        }
+      }
     }
   });
 }
 
-const addItem = async(name, imageUrl, category, description, status, condition, accountId) => {
-  return prisma.Item.create({
+const addItem = async(itemData) => {
+  return prisma.item.create({
     data: {
-      name: name,
+      name: itemData.name,
       registeredAt: new Date(),
-      imageUrl: imageUrl,
-      category: category,
-      description: description,
-      status: status,
-      condition: condition,
-      accountId: accountId
+      imageUrl: itemData.imageUrl,
+      category: itemData.category,
+      description: itemData.description,
+      status: itemData.status || 'AVAILABLE',
+      condition: itemData.condition,
+      accountId: itemData.accountId
     }
   });
 }
 
-const updateItem = async(id, name, imageUrl, category, description, status, condition) => {
-  const item = await prisma.Item.findUnique({
+const updateItem = async(id, itemData) => {
+  const item = await prisma.item.findUnique({
     where: {
       id: id
     }
@@ -45,18 +64,18 @@ const updateItem = async(id, name, imageUrl, category, description, status, cond
     throw new Error('Item não encontrado');
   }
 
-  return prisma.Item.update({
+  return prisma.item.update({
     where: {
       id: id
     },
 
     data: {
-      name: name,
-      imageUrl: imageUrl,
-      category: category,
-      description: description,
-      status: status,
-      condition: condition
+      name: itemData.name,
+      imageUrl: itemData.imageUrl,
+      category: itemData.category,
+      description: itemData.description,
+      status: itemData.status,
+      condition: itemData.condition
     }
   });
 }
