@@ -1,4 +1,5 @@
 import prisma from "../prisma.js";
+import {  ItemStatus, ItemCondition  } from "@prisma/client";
 
 const getAllItems = async(accountId) => {
   return prisma.item.findMany({
@@ -38,22 +39,22 @@ const getItemById = async(id) => {
   });
 }
 
-const addItem = async(itemData) => {
+const addItem = async(name, imageUrl, category, description, status, condition, accountId) => {
   return prisma.item.create({
     data: {
-      name: itemData.name,
+      name: name,
       registeredAt: new Date(),
-      imageUrl: itemData.imageUrl,
-      category: itemData.category,
-      description: itemData.description,
-      status: itemData.status || 'AVAILABLE',
-      condition: itemData.condition,
-      accountId: itemData.accountId
+      imageUrl: imageUrl,
+      category: category,
+      description: description,
+      status: status || ItemStatus.AVAILABLE,
+      condition: condition || ItemCondition.NEW,
+      accountId: accountId
     }
   });
 }
 
-const updateItem = async(id, itemData) => {
+const updateItem = async(id, name, imageUrl, category, description, status, condition) => {
   const item = await prisma.item.findUnique({
     where: {
       id: id
@@ -70,18 +71,18 @@ const updateItem = async(id, itemData) => {
     },
 
     data: {
-      name: itemData.name,
-      imageUrl: itemData.imageUrl,
-      category: itemData.category,
-      description: itemData.description,
-      status: itemData.status,
-      condition: itemData.condition
+      name: name,
+      imageUrl: imageUrl,
+      category: category,
+      description: description,
+      status: status,
+      condition: condition
     }
   });
 }
 
 const deleteItem = async (id) => {
-  const item = await prisma.Item.findUnique({
+  const item = await prisma.item.findUnique({
     where: {
       id: id
     }
@@ -91,7 +92,7 @@ const deleteItem = async (id) => {
     throw new Error('Item não encontrado');
   }
 
-  return prisma.Item.delete({
+  return prisma.item.delete({
     where: {
       id: id
     }

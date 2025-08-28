@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router();
-import {getAllItemsHandler, getItemByIdHandler, addItemHandler, updateItemHandler, deleteItemHandler} from '../controllers/itemController.js';
+import {  getAllItemsHandler, getItemByIdHandler, addItemHandler, updateItemHandler, deleteItemHandler  } from '../controllers/itemController.js';
 
 router.get('/account/:accountId', getAllItemsHandler);
 router.get('/:id', getItemByIdHandler);
