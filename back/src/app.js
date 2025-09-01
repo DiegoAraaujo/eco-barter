@@ -5,6 +5,7 @@ import cors from "cors";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import itemRoutes from "./routes/itemRoutes.js";
 import exchangeRoutes from "./routes/exchangeRoutes.js";
+import exchangeReviewRoutes from "./routes/exchangeReviewRoute.js";
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use(
 app.use("/usuarios", usuarioRoutes);
 app.use("/item", itemRoutes);
 app.use("/exchange", exchangeRoutes);
+app.use("/review", exchangeReviewRoutes);
 
 export default app;
