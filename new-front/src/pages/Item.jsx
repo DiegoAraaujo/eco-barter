@@ -1,11 +1,3 @@
-// Caminho do arquivo: src/pages/Item.jsx
-
-// Página de detalhes de um item específico.
-// - Obtém o `id` da rota (useParams).
-// - Busca dados do item via `getItemById` (mocks/items).
-// - Se não encontrar, mostra mensagem de erro + botão voltar.
-// - Exibe imagem (com fallback), título, categoria, cidade, condição e descrição.
-// - Inclui botão de voltar (histórico ou /catalogo).
 
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -15,20 +7,17 @@ import ButtonLarge from "../components/ui/ButtonLarge";
 import { getItemById } from "../mocks/items";
 import "../styles/pages/Item.css";
 
-import IMG_FALLBACK from "../assets/img/placeholder.png"; // imagem padrão se a original falhar
-
+import IMG_FALLBACK from "../assets/img/placeholder.png"; 
 const Item = () => {
-  const { id } = useParams();           // id capturado da URL (/item/:id)
+  const { id } = useParams();          
   const navigate = useNavigate();
-  const itemData = getItemById(id);     // busca dados do item no "mock DB"
+  const itemData = getItemById(id);    
 
-  // Volta para a página anterior ou para o catálogo
   const handleVoltar = () => {
     if (window.history.length > 1) navigate(-1);
     else navigate("/catalogo");
   };
 
-  // Caso o item não exista
   if (!itemData) {
     return (
       <Container size="lg" className="item-page">
@@ -44,7 +33,6 @@ const Item = () => {
     );
   }
 
-  // Caso o item exista
   return (
     <Container size="lg" className="item-page">
       <main className="item-details" aria-labelledby="titulo-item">
@@ -60,7 +48,6 @@ const Item = () => {
               alt={`Imagem do item ${itemData.title}`}
               loading="lazy"
               decoding="async"
-              // fallback automático caso a imagem falhe
               onError={(e) => {
                 if (!e.currentTarget.dataset.fallback) {
                   e.currentTarget.dataset.fallback = "1";
@@ -71,7 +58,6 @@ const Item = () => {
             <figcaption className="visually-hidden">{itemData.title}</figcaption>
           </figure>
 
-          {/* Detalhes do item */}
           <section className="detalhes-box" aria-labelledby="info-heading">
             <h2 id="info-heading" className="visually-hidden">Informações do item</h2>
 
@@ -97,7 +83,6 @@ const Item = () => {
           </section>
         </div>
 
-        {/* Botão voltar */}
         <div className="voltar-container">
           <ButtonLarge type="button" onClick={handleVoltar}>
             Voltar

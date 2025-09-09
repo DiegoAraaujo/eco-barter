@@ -1,24 +1,11 @@
-// Caminho do arquivo: src/services/auth.js
-
-// Serviço de autenticação e perfil (mock localStorage).
-// - seedDemo(): garante um usuário demo no "banco" local para testes.
-// - mapSignupPayload(form): mapeia o formulário de cadastro para o formato de usuário.
-// - mapProfilePayload(form): mapeia o formulário de perfil para campos persistidos.
-// - getSessionUser(): lê do localStorage o usuário da sessão atual (AuthContext salva).
-// - registerUser(form, { signal }): simula cadastro; valida e-mail duplicado; persiste em "users"; retorna { token, user(min) }.
-// - loginUser({ email, senha }, { signal }): simula login; valida credenciais contra "users"; retorna { token, user(min) }.
-// - updateProfile(form, { token, signal }): simula PATCH do perfil do usuário logado; retorna usuário completo atualizado (sem gravar localStorage aqui — quem faz isso é o AuthContext).
-// - getMyProfile({ token, signal }): retorna o perfil completo do usuário logado (inclui phone/address); usado para pré-preencher o formulário de perfil.
-
 import { loadTable, saveTable, seedDemo } from "../mocks/db";
+import axios from "axios";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
-try { seedDemo(); } catch { }
+try {
+  seedDemo();
+} catch {}
 
-/* =========================
-   Mapeamentos de payload
-   ========================= */
-// mapSignupPayload: converte campos de formulário de cadastro para o formato salvo
 const mapSignupPayload = (form) => ({
   name: form.nome,
   email: form.email,
@@ -29,7 +16,6 @@ const mapSignupPayload = (form) => ({
   state: form.estado,
 });
 
-// mapProfilePayload: converte campos de formulário de perfil (edição) para o formato salvo
 const mapProfilePayload = (form) => ({
   name: form.nome,
   phone: form.telefone,
@@ -38,10 +24,7 @@ const mapProfilePayload = (form) => ({
   state: form.estado,
 });
 
-/* =========================
-   Helpers de sessão
-   ========================= */
-// getSessionUser: lê o snapshot do usuário atual salvo pelo AuthContext
+
 function getSessionUser() {
   try {
     const raw = localStorage.getItem("currentUser");
@@ -51,80 +34,38 @@ function getSessionUser() {
   }
 }
 
-/* =========================
-   SIGNUP (cadastro)
-   ========================= */
-// registerUser: valida duplicidade de e-mail, cria usuário no mock DB e retorna token + snapshot mínimo do usuário
-export async function registerUser(form, { signal } = {}) {
-  const payload = mapSignupPayload(form);
-
-  // simula latência de rede (e suporta AbortController)
-  await new Promise((r) => setTimeout(r, 600));
-  if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
-
-  const users = loadTable("users");
-  const duplicated = users.some(
-    (u) => u.email?.toLowerCase() === payload.email?.toLowerCase()
-  );
-  if (duplicated) {
-    const err = new Error("Validation error");
-    err.status = 400;
-    err.body = { errors: { email: "E-mail já cadastrado" } };
-    throw err;
-  }
-
-  const id = `user_${Date.now().toString(36)}`;
-  const newUser = { id, ...payload, createdAt: Date.now() };
-  users.push(newUser);
-  saveTable("users", users);
-
-  return {
-    token: "demo-token",
-    user: {
-      id,
-      name: newUser.name,
-      email: newUser.email,
-      city: newUser.city,
-      state: newUser.state,
-    },
+export async function registerUser(form) {
+  const payload = {
+    nome: form.nome,
+    fullName: form.nome,
+    email: form.email,
+    phone: form.telefone,
+    city: form.cidade,
+    state: form.estado,
+    password: form.senha,
   };
+
+  try {
+    const userDoc = await axios.post(`${API_BASE}/usuarios`, payload);
+    return userDoc.data;
+  } catch (error) {
+    const message = error.response?.data?.error || error.message;
+    throw new Error(message);
+  }
 }
 
-/* =========================
-   LOGIN (autenticação)
-   ========================= */
-// loginUser: confere e-mail/senha no mock DB; retorna token + snapshot mínimo do usuário
-export async function loginUser({ email, senha }, { signal } = {}) {
-  await new Promise((r) => setTimeout(r, 600));
-  if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
-
-  const users = loadTable("users");
-  const user = users.find(
-    (u) => u.email?.toLowerCase() === email?.toLowerCase() && u.password === senha
-  );
-  if (!user) {
-    const err = new Error("Credenciais inválidas");
-    err.status = 401;
-    err.body = { message: "E-mail ou senha inválidos." };
-    throw err;
+export async function loginUser({ email, password }) {
+  try {
+    const response = await axios.post(`${API_BASE}/usuarios/login`, {
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    return error.response?.data;
   }
-
-  return {
-    token: "demo-token",
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      city: user.city,
-      state: user.state,
-    },
-  };
 }
 
-/* =========================
-   PERFIL (edição/PATCH)
-   ========================= */
-// updateProfile: atualiza dados do usuário logado no mock DB e retorna o usuário completo atualizado
 export async function updateProfile(form, { token, signal } = {}) {
   const payload = mapProfilePayload(form);
 
@@ -161,10 +102,6 @@ export async function updateProfile(form, { token, signal } = {}) {
   };
 }
 
-/* =========================
-   PERFIL (GET atual)
-   ========================= */
-// getMyProfile: retorna o perfil completo do usuário logado (inclui phone/address) para preencher o formulário
 export async function getMyProfile({ token, signal } = {}) {
   await new Promise((r) => setTimeout(r, 200));
   if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
@@ -179,7 +116,6 @@ export async function getMyProfile({ token, signal } = {}) {
   const users = loadTable("users");
   const full = users.find((u) => u.id === current.id);
   if (!full) {
-    // fallback: retorna snapshot mínimo caso não encontre registro completo
     return {
       id: current.id,
       name: current.name,

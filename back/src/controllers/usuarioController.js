@@ -110,34 +110,30 @@ export const deleteUsuarioHandler = async (req, res) => {
 
 export const userAuthHandler = async (req, res) => {
   const { email, password } = req.body;
+
   try {
     const user = await getUsuarioByEmail(email);
-    if (user) {
-      const { id, name, registeredAt, fullName, phone, city, state } = user;
-      const passwordCorrect = bcrypt.compareSync(password, user.passwordHash);
 
-      const payload = {
-        id,
-        name,
-        registeredAt,
-        fullName,
-        phone,
-        city,
-        state,
-      };
-
-      if (passwordCorrect) {
-        const token = await JWTSign(payload);
-
-        console.log(token)
-        res.cookie("token", token).json(payload);
-      } else {
-        res.status(401).json({ error: "senha invalida" });
-      }
-    } else {
-      res.status(404).send("Usuario não existe");
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não existe" });
     }
+
+    const passwordCorrect = bcrypt.compareSync(password, user.passwordHash);
+
+    if (!passwordCorrect) {
+      return res.status(401).json({ error: "Senha inválida" });
+    }
+
+    const { id, name, registeredAt, fullName, phone, city, state } = user;
+    const payload = { id, name, registeredAt, fullName, phone, city, state };
+
+    const token = await JWTSign(payload);
+
+    res.status(200).json({ user: payload, token });
+
   } catch (error) {
-    res.status(500).json({ error: "erro no servidor" });
+    console.error(error);
+    res.status(500).json({ error: "Erro no servidor" });
   }
 };
+

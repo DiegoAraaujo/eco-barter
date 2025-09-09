@@ -1,16 +1,3 @@
-// Caminho do arquivo: src/pages/PersonalData.jsx
-// Página de cadastro ou edição de dados pessoais.
-// - Se `mode="signup"`: formulário de cadastro de usuário.
-// - Caso contrário: edição do perfil existente.
-// - Valida campos (nome, e-mail, senha/confirmar, telefone, endereço, cidade, estado).
-// - Formata telefone automaticamente enquanto digita.
-// - Integra com AuthContext para login (no signup) e atualização do perfil (no profile).
-// - No signup: chama `registerUser`, salva token+usuário no contexto e vai para /my-area.
-// - No profile: chama `updateProfileService` e sincroniza com o contexto.
-// - Exibe erros por campo, erro geral e mensagem de status.
-// - Alternância de visibilidade de senha e confirmação.
-// - Correção: adicionados `abortRef` e `firstInvalidRef` (usados mas não declarados).
-
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/pages/PersonalData.css";
@@ -25,7 +12,6 @@ import {
 } from "../services/auth";
 import { useAuth } from "../context/AuthContext";
 
-// Lista fixa de opções de estados (UFs)
 const UF_OPTIONS = [
   "AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS",
   "MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"
@@ -35,14 +21,11 @@ const PersonalData = ({ mode = "profile" }) => {
   const navigate = useNavigate();
   const isSignup = mode === "signup";
 
-  // Contexto de autenticação (login e atualização do perfil no contexto)
   const { user: authUser, login, updateProfile: setAuthProfile } = useAuth();
 
-  // Refs necessários (correção)
   const abortRef = useRef(null);
   const firstInvalidRef = useRef(null);
 
-  // Estado inicial do formulário
   const initialFormState = {
     nome: "",
     email: "",
@@ -54,7 +37,6 @@ const PersonalData = ({ mode = "profile" }) => {
     estado: "",
   };
 
-  // Estado do formulário e controle de erros
   const [formData, setFormData] = useState(initialFormState);
   const [errors, setErrors] = useState({});
   const [formError, setFormError] = useState("");
@@ -63,11 +45,6 @@ const PersonalData = ({ mode = "profile" }) => {
   const [showPwd, setShowPwd] = useState(false);
   const [showConfirmPwd, setShowConfirmPwd] = useState(false);
 
-  /* =============================
-     EFEITOS
-     ============================= */
-
-  // Reidrata formulário em modo "perfil"
   useEffect(() => {
     if (isSignup) return;
     (async () => {
@@ -84,17 +61,11 @@ const PersonalData = ({ mode = "profile" }) => {
           estado: full.state || "",
         }));
       } catch {
-        // falha silenciosa → usuário pode preencher manualmente
       }
     })();
   }, [isSignup]);
 
-  // Cleanup de requisições pendentes
   useEffect(() => () => abortRef.current?.abort?.(), []);
-
-  /* =============================
-     HELPERS DE VALIDAÇÃO
-     ============================= */
 
   const isValidPhone = (masked) => {
     const digits = masked.replace(/\D/g, "");
@@ -109,11 +80,9 @@ const PersonalData = ({ mode = "profile" }) => {
     return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
   };
 
-  // Validação por campo
   const validateField = (name, value, current = formData) => {
     const v = (value ?? "").trim();
 
-    // obrigatoriedade: sempre no signup; no profile só valida senha/confirmar se preenchidas
     const required =
       isSignup ||
       !["senha", "confirmarSenha"].includes(name) ||
@@ -136,10 +105,6 @@ const PersonalData = ({ mode = "profile" }) => {
     return "";
   };
 
-  /* =============================
-     HANDLERS
-     ============================= */
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => {
@@ -147,7 +112,6 @@ const PersonalData = ({ mode = "profile" }) => {
       const next = { ...prev, [name]: nextVal };
 
       const err = validateField(name, nextVal, next);
-      // revalida confirmação quando senha/confirmar mudarem
       let confirmErrPatch = {};
       if (["senha", "confirmarSenha"].includes(name)) {
         confirmErrPatch.confirmarSenha = validateField("confirmarSenha", next.confirmarSenha, next);

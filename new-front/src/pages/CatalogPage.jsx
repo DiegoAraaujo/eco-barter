@@ -1,60 +1,71 @@
-// Caminho do arquivo: src/pages/CatalogPage.jsx
-
-// Página de Catálogo.
-// - Lê a categoria via query (?categoria=) ou rota (/catalogo/:categoria).
-// - Canonicaliza URL: se vier por query, redireciona para /catalogo/:categoria.
-// - Carrega itens (mock) conforme a categoria selecionada.
-// - Monta a barra lateral de filtros (com contagem por categoria) e os resultados.
-// - Acessibilidade: regiões com aria-live/aria-busy durante carregamento.
-
-import { useState, useEffect, useMemo } from "react";
-import { useSearchParams, useParams, useNavigate } from "react-router-dom";
-import { getItemsByCategory, getAllItems, getCategoriesWithCount } from "../mocks/items";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import CatalogFilters from "../components/catalog/CatalogFilters";
 import CatalogResults from "../components/catalog/CatalogResults";
 import "../styles/pages/CatalogPage.css";
 
-function CatalogPage() {
-  const [searchParams] = useSearchParams();
-  const { categoria } = useParams();
-  const navigate = useNavigate();
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
+function CatalogPage() {
+  const { categoria } = useParams();
   const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Categoria efetiva (querystring tem prioridade sobre o param de rota)
-  const category = searchParams.get("categoria") || categoria || "";
-
-  // Efeito: Canonicaliza a URL (query -> rota /catalogo/:categoria)
   useEffect(() => {
-    const qCat = searchParams.get("categoria");
-    if (qCat && qCat !== categoria) {
-      navigate(`/catalogo/${encodeURIComponent(qCat)}`, { replace: true });
+    async function fetchItems() {
+      setLoading(true);
+      try {
+        const res = await axios.get(`${API_BASE}/item/catalog`);
+        let data = res.data;
+
+        if (!Array.isArray(data)) {
+          if (Array.isArray(data.items)) data = data.items;
+          else data = [];
+        }
+
+        setItems(data);
+
+        const catMap = {};
+        data.forEach((item) => {
+          const cat = item.category || "Sem categoria";
+          catMap[cat] = (catMap[cat] || 0) + 1;
+        });
+
+        const catList = Object.entries(catMap).map(([cat, count]) => ({
+          category: cat,
+          count,
+        }));
+
+        setCategories(catList);
+      } catch (err) {
+        console.error("Erro ao carregar itens:", err);
+        setItems([]);
+        setCategories([]);
+      } finally {
+        setLoading(false);
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams, categoria]);
 
-  // Efeito: Carrega itens do mock conforme a categoria (simula fetch com pequeno delay)
+    fetchItems();
+  }, []);
+
+  const filteredItems = categoria
+    ? items.filter(
+        (item) =>
+          (item.category || "").toLowerCase() ===
+          decodeURIComponent(categoria).toLowerCase()
+      )
+    : items;
+
+  // título da aba
   useEffect(() => {
-    setLoading(true);
-    const tid = setTimeout(() => {
-      const list = category ? getItemsByCategory(category) : getAllItems();
-      setItems(list);
-      setLoading(false);
-    }, 300);
-    return () => clearTimeout(tid);
-  }, [category]);
+    document.title = categoria
+      ? `Catálogo — ${decodeURIComponent(categoria)}`
+      : "Catálogo — EcoBarter";
+  }, [categoria]);
 
-  // Memo: Lista de categorias com contagem (fonte estável no mock)
-  const categories = useMemo(() => getCategoriesWithCount(), []);
-
-  // Efeito: Atualiza o título da aba
-  useEffect(() => {
-    const base = "Catálogo — EcoBarter";
-    document.title = category ? `${base} | ${category}` : base;
-  }, [category]);
-
-  // Estado de carregamento (aria-live anuncia mudanças)
   if (loading) {
     return (
       <div className="catalog-loading" aria-live="polite" aria-busy="true">
@@ -65,15 +76,18 @@ function CatalogPage() {
 
   return (
     <div className="catalog-page">
-      <div className="catalog-container" aria-busy={loading || undefined}>
-        {/* Filtros por categoria */}
+      <div className="catalog-container">
         <aside className="catalog-sidebar">
-          <CatalogFilters categories={categories} selectedCategory={category} />
+          <CatalogFilters
+            categories={categories}
+            selectedCategory={categoria ? decodeURIComponent(categoria) : ""}
+          />
         </aside>
-
-        {/* Resultados do catálogo */}
         <main className="catalog-main">
-          <CatalogResults items={items} category={category} />
+          <CatalogResults
+            items={filteredItems}
+            category={categoria ? decodeURIComponent(categoria) : ""}
+          />
         </main>
       </div>
     </div>

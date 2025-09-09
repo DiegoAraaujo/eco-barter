@@ -1,8 +1,17 @@
 import { Router } from "express";
 const router = Router();
-import {  getAllItemsHandler, getItemByIdHandler, addItemHandler, updateItemHandler, deleteItemHandler  } from '../controllers/itemController.js';
+
+import {  
+  getAllItemsHandler, 
+  getItemByIdHandler, 
+  addItemHandler, 
+  updateItemHandler, 
+  deleteItemHandler,
+  getAllCatalogItemsHandler 
+} from '../controllers/itemController.js';
 
 router.get('/account/:accountId', getAllItemsHandler);
+router.get('/catalog', getAllCatalogItemsHandler);
 router.get('/:id', getItemByIdHandler);
 router.post('/', addItemHandler);
 router.put('/:id', updateItemHandler);

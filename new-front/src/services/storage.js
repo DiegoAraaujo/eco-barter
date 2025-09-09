@@ -7,7 +7,6 @@
 
 const NAMESPACE = "ecobarter";
 
-//Lê um valor do localStorage e faz parse de JSON
 export const load = (key, fallback) => {
   try {
     const raw = localStorage.getItem(`${NAMESPACE}:${key}`);
@@ -17,7 +16,6 @@ export const load = (key, fallback) => {
   }
 };
 
-//Grava um valor no localStorage (como JSON)
 export const save = (key, value) => {
   try {
     localStorage.setItem(`${NAMESPACE}:${key}`, JSON.stringify(value));
@@ -26,7 +24,6 @@ export const save = (key, value) => {
   }
 };
 
-// Remove um valor do localStorage
 export const remove = (key) => {
   try {
     localStorage.removeItem(`${NAMESPACE}:${key}`);

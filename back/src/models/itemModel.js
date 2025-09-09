@@ -1,45 +1,55 @@
 import prisma from "../prisma.js";
-import {  ItemStatus, ItemCondition  } from "@prisma/client";
+import { ItemStatus, ItemCondition } from "@prisma/client";
 
-const getAllItems = async(accountId) => {
+const getAllItems = async (accountId) => {
   return prisma.item.findMany({
     where: {
-      accountId: accountId
+      accountId: accountId,
     },
     orderBy: {
-      name: 'asc'
-    }
+      name: "asc",
+    },
   });
-}
+};
 
-const getItemById = async(id) => {
+const getItemById = async (id) => {
   return prisma.item.findUnique({
     where: {
-      id: id
+      id: id,
     },
     include: {
       account: true, // Carrega os dados da conta dona do item
-      
-      sentExchanges: { // Histórico de quando o item foi oferecido em trocas
-        include: {
-          receiverItem: true,   // Item que foi recebido em troca
-          receiverAccount: true, // Conta que recebeu este item
-          reviews: true         // Avaliações desta troca
-        }
-      },
-      
-      recExchanges: { // Histórico de quando outros queriam este item em troca
-        include: {
-          senderItem: true,    // Item que foi oferecido em troca
-          senderAccount: true, // Conta que ofereceu o item
-          reviews: true        // Avaliações desta troca
-        }
-      }
-    }
-  });
-}
 
-const addItem = async(name, imageUrl, category, description, status, condition, accountId) => {
+      sentExchanges: {
+        // Histórico de quando o item foi oferecido em trocas
+        include: {
+          receiverItem: true, // Item que foi recebido em troca
+          receiverAccount: true, // Conta que recebeu este item
+          reviews: true, // Avaliações desta troca
+        },
+      },
+
+      recExchanges: {
+        // Histórico de quando outros queriam este item em troca
+        include: {
+          senderItem: true, // Item que foi oferecido em troca
+          senderAccount: true, // Conta que ofereceu o item
+          reviews: true, // Avaliações desta troca
+        },
+      },
+    },
+  });
+};
+
+const addItem = async (
+  name,
+  imageUrl,
+  category,
+  description,
+  status,
+  condition,
+  accountId
+) => {
   return prisma.item.create({
     data: {
       name: name,
@@ -49,25 +59,33 @@ const addItem = async(name, imageUrl, category, description, status, condition, 
       description: description,
       status: status || ItemStatus.AVAILABLE,
       condition: condition || ItemCondition.NEW,
-      accountId: accountId
-    }
+      accountId: accountId,
+    },
   });
-}
+};
 
-const updateItem = async(id, name, imageUrl, category, description, status, condition) => {
+const updateItem = async (
+  id,
+  name,
+  imageUrl,
+  category,
+  description,
+  status,
+  condition
+) => {
   const item = await prisma.item.findUnique({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
 
-  if(!item) {
-    throw new Error('Item não encontrado');
+  if (!item) {
+    throw new Error("Item não encontrado");
   }
 
   return prisma.item.update({
     where: {
-      id: id
+      id: id,
     },
 
     data: {
@@ -76,33 +94,44 @@ const updateItem = async(id, name, imageUrl, category, description, status, cond
       category: category,
       description: description,
       status: status,
-      condition: condition
-    }
+      condition: condition,
+    },
   });
-}
+};
 
 const deleteItem = async (id) => {
   const item = await prisma.item.findUnique({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
 
-  if(!item) {
-    throw new Error('Item não encontrado');
+  if (!item) {
+    throw new Error("Item não encontrado");
   }
 
   return prisma.item.delete({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
-}
+};
+
+const getAllItemsCatalog = async (category) => {
+  return prisma.item.findMany({
+    where: category ? { category: category } : {},
+    orderBy: { name: "asc" },
+    include: {
+      account: true, // para trazer dados do dono do item
+    },
+  });
+};
 
 export {
   getAllItems,
   getItemById,
   addItem,
   updateItem,
-  deleteItem
-}
+  deleteItem,
+  getAllItemsCatalog, // <== não esqueça de exportar
+};
