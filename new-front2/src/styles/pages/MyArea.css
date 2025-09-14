@@ -1,0 +1,214 @@
+:root {
+  --status-aguardando: #f0ad4e;
+  --status-aceito: #5cb85c;
+  --status-recusado: #d9534f;
+  --transition-fast: 0.25s ease-in-out;
+  --myarea-box-max: 64rem;
+}
+
+/* Área principal da página */
+.my-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-24, 2.4rem);
+  padding: var(--space-32, 3.2rem) var(--space-16, 1.6rem) var(--space-40, 4rem);
+  background: var(--bg-color);
+  min-height: calc(100dvh - var(--header-height) - var(--footer-height));
+  box-sizing: border-box;
+}
+
+/* Cartões (centralizados e limitados) */
+.card-area {
+  background: var(--card-color);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-sm, 0 5px 10px rgba(0, 0, 0, .18));
+  padding: var(--space-24, 2.4rem);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: var(--myarea-box-max);
+  margin-inline: auto;
+  transition: box-shadow var(--transition-fast);
+}
+.card-area + .card-area {
+  margin-top: var(--space-24, 2.4rem);
+}
+.card-area:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+.card-area h2 {
+  font-size: var(--fs-18, 1.8rem);
+  color: var(--primary-color);
+  margin-bottom: 1.25rem;
+}
+
+/* Lista simples */
+.lista-itens {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.lista-itens li {
+  margin-bottom: 1.25rem;
+  font-size: var(--fs-16, 1.6rem);
+  color: var(--text-color-black);
+}
+
+/* Estado vazio */
+.estado-vazio {
+  color: var(--text-muted, #6b7280);
+}
+
+/* Estrutura de item/proposta */
+.item-proposta {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-left: 4px solid var(--border-color);
+  background: var(--form-color);
+  border-radius: var(--radius-md, 12px);
+  transition: background-color var(--transition-fast);
+}
+.item-proposta:hover {
+  background: #f7f7f7;
+}
+
+/* Layout com imagem */
+.proposta-conteudo {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.proposta-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: .5rem;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+.proposta-detalhes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+/* Status */
+.status {
+  font-weight: 700;
+  font-size: var(--fs-16, 1.6rem);
+  margin-top: .2rem;
+}
+.status.aguardando { color: var(--status-aguardando); }
+.status.aceito     { color: var(--status-aceito); }
+.status.recusado   { color: var(--status-recusado); }
+
+/* Ações */
+.acoes-proposta {
+  margin-top: .5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+/* Botões simples */
+.btn {
+  padding: .5rem 1rem;
+  font-size: var(--fs-14, 1.4rem);
+  font-weight: 600;
+  border-radius: .4rem;
+  cursor: pointer;
+  background: transparent;
+  transition: background-color .3s ease, color .3s ease, transform .2s ease;
+  border: 1px solid;
+  display: inline-block;
+}
+.btn:hover { transform: translateY(-1px); }
+
+.btn.aceitar {
+  color: var(--status-aceito);
+  border-color: var(--status-aceito);
+}
+.btn.aceitar:hover {
+  background: var(--status-aceito);
+  color: #fff;
+}
+
+.btn.recusar,
+.btn.remover {
+  color: var(--status-recusado);
+  border-color: var(--status-recusado);
+}
+.btn.recusar:hover,
+.btn.remover:hover {
+  background: var(--status-recusado);
+  color: #fff;
+}
+
+.btn.detalhes {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.btn.detalhes:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* Botão centralizado (CTA) */
+.botao-centralizado {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  width: 100%;
+}
+.botao-centralizado .btn,
+.botao-centralizado a {
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* CTA explorar itens */
+.browse-items {
+  margin-top: 2rem;
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-sm);
+  padding: 1.6rem;
+  text-align: center;
+  width: 100%;
+  max-width: var(--myarea-box-max);
+  margin-inline: auto;
+}
+.browse-items h2 {
+  font-size: var(--fs-20, 2rem);
+  color: var(--primary-color);
+  margin-bottom: .5rem;
+}
+.browse-items p {
+  color: var(--text-color-black);
+  opacity: .9;
+  margin-bottom: 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 767px) {
+  .acoes-proposta { flex-direction: column; }
+  .card-area h2 { font-size: 1.25rem; }
+  .item-proposta { font-size: .95rem; }
+  .proposta-conteudo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .proposta-thumb {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root { --myarea-box-max: 60rem; }
+}

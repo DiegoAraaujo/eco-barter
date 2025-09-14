@@ -1,0 +1,69 @@
+/* -------- Mapas de tamanho (ajustam --container-max) -------- */
+.container--sm { --container-max: 72rem; }   /* ~720px */
+.container--md { --container-max: 96rem; }   /* ~960px */
+.container--lg { --container-max: 120rem; }  /* ~1200px (padrão) */
+.container--xl { --container-max: 144rem; }  /* ~1440px */
+
+/*
+  IMPORTANTE:
+  O .container base está definido no index.css assim:
+
+  .container {
+    inline-size: min(100% - calc(var(--page-gutter-x) * 2), var(--container-max));
+    margin-inline: auto;
+  }
+
+  Ou seja, o gutter lateral vem do cálculo com --page-gutter-x.
+*/
+
+/* -------- Variantes que ignoram limites herdados -------- */
+.container.container--fluid,
+.container.container--full,
+.container--bleed {
+  max-width: none;
+}
+
+/* -------- Remover gutter lateral do container base -------- */
+.container.container--no-gutter {
+  inline-size: min(100%, var(--container-max));
+  margin-inline: auto;
+  /* se o base ganhar padding no futuro, zere aqui: */
+  padding-inline: 0;
+}
+
+/* -------- Fluid (100% com o mesmo “respiro” do base) -------- */
+.container.container--fluid {
+  /* mantém o mesmo recuo visual do base usando --page-gutter-x */
+  inline-size: calc(100% - calc(var(--page-gutter-x) * 2));
+  margin-inline: auto;
+  /* se preferir padding (em vez do cálculo de inline-size), poderia ser:
+     padding-inline: var(--page-gutter-x); */
+}
+
+/* -------- Full (100% sem limite, sem gutters) -------- */
+.container.container--full {
+  inline-size: 100%;
+  margin: 0;
+  padding: 0; /* explícito: sem gutters */
+  display: block;
+}
+
+/* -------- Full-bleed (ocupa a viewport horizontal inteira) -------- */
+.container--bleed {
+  inline-size: 100vw;
+  margin-inline: calc(50% - 50vw);
+  overflow-x: clip;
+
+  /* Compensa a largura da scrollbar para evitar “pêndulo” lateral */
+  padding-inline: max(0px, calc((100vw - 100%) / 2));
+}
+
+/* Evita bleed aninhado (pai já é full-bleed) */
+.container--bleed .container--bleed {
+  padding-inline: 0;
+  margin-inline: 0;
+  inline-size: 100%;
+}
+
+/* Alias legado (compatibilidade, pode remover quando não houver referências) */
+.container-padrao {}

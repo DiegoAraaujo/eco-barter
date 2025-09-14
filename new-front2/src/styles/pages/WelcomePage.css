@@ -1,0 +1,45 @@
+/* WelcomePage — wrapper simples, sem colunas laterais */
+.welcome-page {
+  grid-column: 1 / -1;      /* atravessa o grid do layout pai */
+  inline-size: 100%;        /* evita usar 100vw (não cria scroll horiz.) */
+  overflow: visible;         /* não corta os filhos full-bleed */
+  display: grid;
+  row-gap: var(--space-40);  /* espaçamento vertical entre seções */
+}
+
+/* REMOVER o gap específico entre AvailableProducts e CallSection */
+.welcome-page > .products-section + .call-section {
+  margin-block-start: calc(-1 * var(--space-40)); /* Compensa o gap */
+}
+
+/* Ajuste de espaçamento em telas menores */
+@media (max-width: 768px) {
+  .welcome-page { 
+    row-gap: var(--space-32); 
+  }
+  
+  .welcome-page > .products-section + .call-section {
+    margin-block-start: calc(-1 * var(--space-32)); /* Compensa o gap no mobile */
+  }
+}
+
+/* Seções que já são full-bleed continuam controlando seu próprio bleed */
+.welcome-page > :is(.hero-section, .call-section) {
+  margin: 0; /* o bleed é interno desses componentes */
+}
+
+/* Opcional: modo full-bleed do wrapper (quase nunca necessário aqui) */
+.welcome-page--bleed {
+  inline-size: 100vw;
+  margin-inline: calc(50% - 50vw);
+  overflow-x: clip;
+  padding-inline: max(0px, calc((100vw - 100%) / 2)); /* compensa scrollbar */
+}
+
+/* Opcional: ocupar a altura útil (header na home é absoluto) */
+.welcome-page--fill {
+  min-block-size: calc(100dvh - var(--footer-height));
+}
+@supports (height: 100svh) {
+  .welcome-page--fill { min-block-size: calc(100svh - var(--footer-height)); }
+}

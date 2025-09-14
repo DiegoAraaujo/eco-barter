@@ -1,0 +1,136 @@
+/* Página/área principal */
+.item-page {}
+
+.item-details {
+  inline-size: 100%;
+  padding: var(--space-32) var(--space-16);
+  display: grid;
+  gap: var(--space-24);
+  justify-items: center;
+  box-sizing: border-box;
+}
+
+/* Grid da página (mídia + detalhes) */
+.item-layout {
+  inline-size: 100%;
+  display: grid;
+  gap: var(--space-24);
+  align-items: start;
+}
+
+/* a partir de 768px vira 2 colunas proporcionais */
+@media (min-width: 768px) {
+  .item-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: var(--space-24);
+  }
+}
+
+/* Mídia do item */
+.item-media {
+  margin: 0;
+  display: block;
+  background: var(--bg-muted);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  /* Mantém caixa estável; imagem se adapta */
+  aspect-ratio: 4 / 3;
+}
+
+.item-media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Caixa de detalhes */
+.detalhes-box {
+  background-color: var(--card-color);
+  padding: clamp(var(--space-20), 2.4vw, var(--space-32));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  inline-size: 100%;
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--space-20);
+}
+
+/* Metadados (dl) */
+.item-meta {
+  display: grid;
+  gap: var(--space-16); /* mais respiro entre linhas */
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-12);
+  align-items: baseline;
+}
+
+/* ↑ AUMENTO DE TAMANHO DOS TEXTOS */
+.meta-row dt,
+.meta-row dd {
+  font-size: clamp(1.7rem, 1.2rem + 0.6vw, 2rem); /* ~17→20px, responsivo */
+  line-height: 1.5;
+}
+
+.meta-row dt {
+  font-weight: 700;
+  color: var(--primary-color);
+  min-inline-size: 9.5rem; /* mais espaço para o rótulo maior */
+}
+
+.meta-row dd {
+  margin: 0;
+  color: var(--text-color-black);
+}
+
+/* Em telas muito estreitas, empilha rótulo/valor */
+@media (max-width: 380px) {
+  .meta-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .meta-row dt { min-inline-size: 0; }
+}
+
+/* Descrição */
+.descricao-item { line-height: 1.6; }
+
+.descricao-title {
+  font-size: var(--fs-18);
+  margin-bottom: var(--space-8);
+  color: var(--dark-green);
+}
+
+/* Ações */
+.botoes-acao {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
+  flex-wrap: wrap;
+}
+
+/* Voltar */
+.voltar-container {
+  margin-top: var(--space-12);
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 480px) {
+  .item-details { padding: var(--space-16); }
+  .botoes-acao { flex-direction: column; gap: var(--space-8); }
+}
+
+/* Telas muito grandes */
+@media (min-width: 1800px) {
+  .item-media { aspect-ratio: 16 / 10; }
+  .detalhes-box { font-size: var(--fs-16); }
+}
