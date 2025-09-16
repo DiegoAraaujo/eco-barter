@@ -6,6 +6,7 @@ import { UserContext } from "./contexts/UserContext";
 import WelcomePage from "./pages/WelcomePage";
 import Login from "./pages/Login";
 import MyArea from "./pages/MyArea";
+import PersonalData from "./pages/PersonalData";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<WelcomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/myarea" element={<MyArea />} />
+          <Route path="/personal-data" element={<PersonalData />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

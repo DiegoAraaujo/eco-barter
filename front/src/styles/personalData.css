@@ -1,0 +1,103 @@
+
+.main-dados {
+}
+
+.titulo-dados {
+    font-size: 2rem;
+    color: var(--brand);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.dados-box {
+    background-color: var(--bg-muted);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-2);
+    width: 100%;
+    max-width: 500px;
+    margin-inline: auto;
+}
+
+.dados-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grupo-campos {
+    border: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.grupo-campos legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--brand);
+    font-size: 1rem;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.dados-form label {
+    font-size: 14px;
+    color: var(--brand);
+    margin-bottom: 5px;
+}
+
+.dados-form input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.dados-form input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 5px rgba(49, 87, 44, .5);
+}
+
+.dados-form input:invalid {
+    border-color: var(--err-2);
+}
+
+.dados-form input:valid {
+    border-color: var(--brand);
+}
+
+.btn-verde {
+    background-color: var(--brand);
+    color: var(--text-inv);
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color .3s ease;
+    margin: 2rem auto 0;
+    display: block;
+    width: fit-content;
+}
+
+.btn-verde:hover {
+    background-color: var(--brand-700);
+}
+
+/* Feedback de sucesso */
+.feedback-sucesso {
+    color: var(--ok);
+    font-weight: bold;
+    text-align: center;
+    transition: visibility .3s ease, opacity .3s ease;
+    opacity: 0;
+}
+
+.feedback-sucesso[style*="visible"] {
+    opacity: 1;
+}
