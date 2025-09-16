@@ -1,96 +1,83 @@
-import ImgCamiseta from "../assets/camiseta.png";
-import ImgDisco from "../assets/disco.png";
-import ImgLiqui from "../assets/Liqui.png";
-import ImgLivro from "../assets/livro.png";
-import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
-
+import Footer from "../components/layout/Footer";
 import CardMyProduct from "../components/ui/CardMyProduct";
+import SmallerButton from "../components/ui/SmallerButton";
 import "../styles/myArea.css";
-import SmallerButton from '../components/ui/SmallerButton'
 
-function MyArea () {
-    return(
-        <>
-        <main>
-<Header />
-        <h1> Minha Área</h1>
-        <section className="items-section">
-              <div className="items-wrapper">
-                     <h2>  Meus itens Cadastrados </h2>
-    
-     <div className="grid-items">
-       
-        <CardMyProduct image={ ImgCamiseta}
- imageDescription="Camisa" productName="Camiseta" category="Roupas" productState="Disponível"  >  
- <div>
-  <SmallerButton buttonMessage="Editar" />
-   <SmallerButton buttonMessage="Remover" />
-   </div>
-  </CardMyProduct>
+import { useState  } from "react";
 
+function MyArea() {
   
-        <CardMyProduct image={ ImgDisco}
- imageDescription="Disco" productName="Disco de vinil" category="Acessórios" productState="Disponível" > 
- <div>
-  <SmallerButton buttonMessage="Editar" />
-   <SmallerButton buttonMessage="Remover" />
-   </div>
+  const items = [
+   {
+      id: 1,
+      name: "Blazer Masculino Tamanho 42",
+      imageUrl:
+        "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=1200&auto=format&fit=crop",
+      category: "Roupas",
+      status: "Disponível",
+    },
+    {
+      id: 1,
+      name: "Blazer Masculino Tamanho 42",
+      imageUrl:
+        "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=1200&auto=format&fit=crop",
+      category: "Roupas",
+      status: "Disponível",
+    },
+      {
+      id: 1,
+      name: "Blazer Masculino Tamanho 42",
+      imageUrl:
+        "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=1200&auto=format&fit=crop",
+      category: "Roupas",
+      status: "Disponível",
+    },
+     
+  ];
 
-   </CardMyProduct>
- 
-        <CardMyProduct image={ ImgLiqui}
- imageDescription="Liquidificador" productName="Liquidificador" category="Eletrodoméstico" productState="Disponível">   
- <div>
-  <SmallerButton buttonMessage="Editar" />
-   <SmallerButton buttonMessage="Remover" />
-   </div>
-   </CardMyProduct>
+  return (
+    <>
+      <main>
+        <Header />
+        <h1>Minha Área</h1>
 
-         <CardMyProduct image={ ImgLivro}
- imageDescription="Livro" productName="Livro A Bela e a Ferra" category="Livros" productState="Disponível" >   
-  <div>
-  <SmallerButton buttonMessage="Editar" />
-   <SmallerButton buttonMessage="Remover" />
-   </div>
-   </CardMyProduct>
+        <section className="items-section">
+          <div className="items-wrapper">
+            <h2>Meus itens cadastrados</h2>
 
- 
-    {/*       <CardMyProduct image={ ImgLiqui}
-        
- imageDescription="Liquidificador"  productName="Liquidificador" category="Eletrodoméstico" productState="Disponível"  >   
-   <div>
-  <SmallerButton buttonMessage="Editar" />
-   <SmallerButton buttonMessage="Remover" />
-   </div>  
-   </CardMyProduct>
-
-    <CardMyProduct image={ ImgLivro}
- imageDescription="Livro" productName="Livro A Bela e a Ferra" category="Livros" productState="Disponível" >  
- <div>
-  <SmallerButton buttonMessage="Editar" />
-   <SmallerButton buttonMessage="Remover" />
-   </div>
-  </CardMyProduct>*/}
- 
-           
-           
-        
-        
-            
+            {items.length === 0 ? (
+             
+              <div className="empty-state">
+                <p>Você ainda não cadastrou itens.</p>
+              </div>
+            ) : (
+              <div className="grid-items">
+                {items.map((item) => (
+                  <CardMyProduct
+                    key={item.id}
+                    image={item.imageUrl}
+                    imageDescription={item.name}
+                    productName={item.name}
+                    category={item.category}
+                    productState={item.status} 
+                  >
+                    <div>
+                      <SmallerButton buttonMessage="Editar" />
+                      <SmallerButton buttonMessage="Remover" />
+                    </div>
+                  </CardMyProduct>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
 
       
-</div>
-       </div>
-          
-        
-        </section>
- <Footer />
-        </main>
-        </>
-
-    )
-
+      </main>
+       <Footer />
+    </>
+  );
 }
 
 export default MyArea;

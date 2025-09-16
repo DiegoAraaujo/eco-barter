@@ -1,0 +1,141 @@
+.item-details {
+  inline-size: 100%;
+  padding: 10rem;
+  display: grid;
+  gap: 5rem;
+  justify-items: center;
+  box-sizing: border-box;
+}
+.page-title {
+  margin: 0;
+  text-align: center;
+  color: var(--dark-green);
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.item-layout {
+  max-width: 180rem;
+  display: grid;
+   gap: 3rem;
+   margin-left: 0rem;
+  align-items: start;
+  font-size: 2.1rem;
+  justify-content: center;
+  
+}
+.detalhes-box {
+   margin-left: 3rem; 
+     border-radius: 10px;
+       max-inline-size: 700px; 
+  justify-self: start;  
+}
+
+@media (min-width: 768px) {
+  .item-layout {
+    grid-template-columns: minmax(0, 0.5fr) minmax(0, 1.0fr);
+   
+  }
+    .item-layout {
+
+
+
+ margin-left:0;
+  align-items: start;
+  font-size: 2.1rem;
+  justify-content: center;
+  
+}
+}
+.item-media {
+  margin: 0;
+  display: block;
+  background: var(--overlay-light);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.item-media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.detalhes-box {
+   padding-left:1.5rem;
+  box-shadow: var(--shadow-sm);
+  inline-size: 100%;
+  box-sizing: border-box;
+  display: grid;
+ 
+}
+.meta-row {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.meta-row dt,
+.meta-row dd {
+  font-size: 2.6rem;
+  line-height: 2.5;
+  
+}
+
+.meta-row dt {
+  font-weight: 700;
+  color: var(--primary-color);
+  min-inline-size: 9.5rem;
+}
+
+.meta-row dd {
+  margin: 0;
+  color: var(--text-color-black);
+}
+
+@media (max-width: 420px) {
+  .meta-row {
+    grid-template-columns: 1fr;
+  }
+  .meta-row dt { min-inline-size: 0; }
+  .item-layout {
+  max-width: 30rem;
+  display: grid;
+   gap: 3rem;
+ margin-left:0;
+  align-items: start;
+  font-size: 2.1rem;
+  justify-content: center;
+  
+}
+}
+
+.descricao-item { line-height: 1.6; }
+
+.descricao-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-8);
+  color: var(--dark-green);
+}
+
+.voltar-container {
+  margin-top: var(--space-12);
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+}
+
+.btn-voltar {
+  appearance: none;
+  border: none;
+  padding: 0.90rem 4rem;
+  border-radius: 999px;
+  font-size: 24px;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+}

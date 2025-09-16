@@ -1,46 +1,54 @@
-
-
-h1{
-  color:var(--title-form-color);
+h1 {
+  color: var(--title-form-color);
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
 }
-.items-section{
+
+.items-section {
   background-color: var(--card-color);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.items-wrapper{
+
+.items-wrapper {
   background-color: var(--overlay-light);
   border-radius: 0.6rem;
   padding: 2rem;
-  max-width: 100%;
-  
+  max-width: 1200px;   
+  margin: 0 auto;      
 }
 
-.items-section > div> h2{
-  color: var( --border-color);
-  font-size: 2rem;
+.items-section > div > h2 {
+  color: var(--border-color);
+  font-size: 2.2rem;
   text-align: left;
+  margin-bottom: 1.5rem;
 }
-
-.grid-items{
+.empty-state{
+  font-size: 2rem;
+}
+.grid-items {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  flex-wrap: wrap;
-  color: var(  --shadow-sm);
+  justify-items: center; 
 }
-
-
-
-
+.card-my-product img {
+  width: 10rem;   
+  height: 15rem;  
+  object-fit: cover; 
+  border-radius: 0.5rem;
+}
 
 @media (max-width: 768px) {
-  .grid-items {
-    grid-template-columns: 1fr;
+   .items-section > div > h2 {
+    font-size: 1.8rem;
   }
+
+  .grid-items {
+    grid-template-columns: 1fr; /* 👈 1 card por linha */
+  }
+ 
 }
