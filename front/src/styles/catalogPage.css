@@ -110,7 +110,7 @@
 
 .productListMain {
   display: flex;
-  justify-content: flex-start ;
+  justify-content: center ;
   gap: 2rem;
   flex-wrap: wrap;
   padding-top: 2.5rem;
