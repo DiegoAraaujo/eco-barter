@@ -1,0 +1,254 @@
+/* ===================== PopularCategories ===================== */
+
+.popular-categories-section {
+  --pc-arrow-space: 3.5rem;      /* espaço reservado para as setas */
+  --pc-gap: var(--space-24);
+  --pc-side-gap: clamp(1rem, 3vw, 2.4rem);
+
+  background: var(--bg-color);
+  scroll-margin-top: var(--header-height);
+
+  /* evita bleed horizontal de overlays/gradientes */
+  overflow-x: clip;
+}
+
+/* Fallback para navegadores que não suportam overflow: clip */
+@supports not (overflow: clip) {
+  .popular-categories-section { overflow-x: hidden; }
+}
+
+/* Container principal - centraliza conteúdo com gutters */
+.popular-categories-section > .container {
+  display: grid;
+  gap: var(--space-20);
+}
+
+/* Título da seção */
+.popular-categories-section h2 {
+  color: var(--primary-color);
+  font-size: var(--fs-24);
+  text-align: center;
+  margin-block-end: var(--space-16);
+}
+
+/* Container para setas e gradientes - contexto de posicionamento */
+.popular-categories-container {
+  position: relative;
+  isolation: isolate;
+  max-inline-size: 100%;
+  overflow: hidden; /* impede sobra lateral */
+  border-radius: var(--radius-lg);
+
+  /* Respiro lateral com suporte a safe areas */
+  padding-inline: var(--pc-side-gap);
+  padding-inline-start: max(var(--pc-side-gap), env(safe-area-inset-left));
+  padding-inline-end: max(var(--pc-side-gap), env(safe-area-inset-right));
+  
+  padding-block: var(--space-16);
+}
+
+/* Lista rolável com snap - estilo principal */
+.popular-categories-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  gap: var(--pc-gap);
+
+  background: var(--light-green);
+  padding-block: var(--space-16);
+
+  /* Reserva espaço para as setas */
+  padding-inline: calc(var(--space-16) + var(--pc-arrow-space));
+
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  inline-size: 100%;
+  overflow-x: auto;
+
+  /* Comportamento de scroll */
+  scroll-behavior: smooth;
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: calc(var(--space-16) + var(--pc-arrow-space));
+
+  /* Melhorias de UX */
+  scrollbar-width: none;              /* Firefox */
+  -ms-overflow-style: none;           /* IE/Edge Legacy */
+  -webkit-overflow-scrolling: touch;  /* iOS */
+  overscroll-behavior-x: contain;
+  scrollbar-gutter: stable;
+  outline: none;
+}
+
+/* Esconde scrollbar no Webkit */
+.popular-categories-list::-webkit-scrollbar { 
+  display: none; 
+}
+
+/* Foco acessível */
+.popular-categories-list:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+  border-radius: var(--radius-lg);
+}
+
+/* Snap dos itens */
+.popular-categories-list > [role="listitem"] {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Animação de reveal-in para os cards */
+.pc-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.pc-reveal.is-visible { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+/* Respeita preferência de redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  .pc-reveal, 
+  .pc-reveal.is-visible {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  .popular-categories-list { 
+    scroll-behavior: auto; 
+  }
+}
+
+/* ---- Setas de navegação ---- */
+.category-arrow {
+  position: absolute;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  inline-size: 3rem;
+  block-size: 3rem;
+  border-radius: 999px;
+
+  background: var(--card-color);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+  /* Posicionamento com safe areas */
+  inset-inline-start: max(0.5rem, env(safe-area-inset-left));
+}
+
+/* Seta direita */
+.category-arrow.right {
+  inset-inline-start: auto;
+  inset-inline-end: max(0.5rem, env(safe-area-inset-right));
+}
+
+/* Ícone das setas */
+.category-arrow img {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+/* Estados interativos */
+.category-arrow:hover:not(:disabled),
+.category-arrow:focus-visible:not(:disabled) {
+  transform: translateY(-50%) scale(1.06);
+  box-shadow: var(--shadow-md);
+}
+
+/* Estado desabilitado */
+.category-arrow:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ---- Gradientes de borda (indicam overflow) ---- */
+.edge-fade {
+  position: absolute;
+  inset-block: 0;
+  inline-size: var(--pc-arrow-space);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.edge-fade.show { 
+  opacity: 1; 
+}
+
+/* Gradiente esquerdo */
+.edge-fade.left {
+  inset-inline-start: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+}
+
+/* Gradiente direito */
+.edge-fade.right {
+  inset-inline-end: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+}
+
+/* ---- Responsividade ---- */
+
+/* Tablets e telas menores */
+@media (max-width: 768px) {
+  .popular-categories-section > .container {
+    gap: var(--space-16);
+  }
+  
+  .popular-categories-container { 
+    --pc-side-gap: var(--space-12); 
+    padding-block: var(--space-12);
+  }
+  
+  .popular-categories-list {
+    padding-inline: calc(var(--space-12) + var(--pc-arrow-space));
+    padding-block: var(--space-12);
+    scroll-padding-inline: calc(var(--space-12) + var(--pc-arrow-space));
+    gap: var(--space-16);
+  }
+  
+  .category-arrow { 
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+  }
+  
+  .category-arrow img { 
+    inline-size: 1rem;
+    block-size: 1rem;
+  }
+  
+  .popular-categories-section h2 {
+    margin-block-end: var(--space-12);
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .popular-categories-list {
+    padding-inline: calc(var(--space-8) + var(--pc-arrow-space));
+    scroll-padding-inline: calc(var(--space-8) + var(--pc-arrow-space));
+    gap: var(--space-12);
+  }
+  
+  .category-arrow {
+    inset-inline-start: max(0.25rem, env(safe-area-inset-left));
+  }
+  
+  .category-arrow.right {
+    inset-inline-end: max(0.25rem, env(safe-area-inset-right));
+  }
+}

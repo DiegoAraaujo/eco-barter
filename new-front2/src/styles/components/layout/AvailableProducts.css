@@ -1,0 +1,202 @@
+/* ===================== AvailableProducts.css ===================== */
+
+.products-section {
+  --products-side-gap: clamp(1rem, 3vw, 2.4rem);
+  background: var(--dark-green);
+  padding-block: var(--space-40);
+  scroll-margin-top: var(--header-height);
+  inline-size: 100%;
+  overflow: clip;
+}
+@supports not (overflow: clip) {
+  .products-section { overflow-x: hidden; }
+}
+
+/* Variante clara */
+.products-section.is-light { background: transparent; }
+.products-section.is-light .products-heading { color: var(--dark-green); }
+.products-section.is-light .products-subtitle { color: var(--text-muted); }
+.products-section.is-light .products-empty {
+  color: var(--text-color-black);
+  background: var(--bg-muted);
+  border: 1px solid var(--border-color);
+}
+
+/* Conteúdo centralizado */
+.products-inner {
+  display: grid;
+  gap: var(--space-24);
+  text-align: center;
+  padding-inline: var(--products-side-gap);
+  padding-inline-start: max(var(--products-side-gap), env(safe-area-inset-left));
+  padding-inline-end:   max(var(--products-side-gap), env(safe-area-inset-right));
+}
+
+/* Título interno */
+.products-heading {
+  color: var(--text-color-white);
+  font-size: var(--fs-24);
+  font-weight: 700;
+  margin-block-end: var(--space-12);
+}
+
+/* Subtítulo */
+.products-subtitle {
+  color: rgba(255, 255, 255, .9);
+  color: color-mix(in oklab, var(--text-color-white) 90%, black 10%);
+  font-size: var(--fs-16);
+  margin-block-end: var(--space-16);
+}
+
+/* Grid responsivo de cards */
+.products-list {
+  display: grid;
+  gap: var(--space-20);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+
+.product-slot { display: block; block-size: 100%; }
+.product-slot > * { block-size: 100%; }
+
+/* Estado vazio */
+.products-empty {
+  color: var(--text-color-white);
+  opacity: .9;
+  font-size: var(--fs-16);
+  padding: var(--space-20);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+  margin-block: var(--space-16);
+}
+
+/* AvailableProducts.css - Apenas a parte do botão foi modificada */
+/* ===================== BOTÃO "VER MAIS ITENS" ===================== */
+/* Estilo do botão consistente com o HeroBanner (sem seta) */
+.hero-style-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px; /* Reduzido o padding lateral para melhor proporção */
+  background-color: transparent;
+  color: var(--text-color-white);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-top: 2rem;
+  font-size: var(--fs-16);
+  box-shadow: var(--shadow-xs);
+}
+
+.hero-style-button:hover,
+.hero-style-button:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-color-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+}
+
+.hero-style-button:active {
+  transform: translateY(0);
+}
+
+/* Modo light - ajustado para consistência */
+.products-section.is-light .hero-style-button {
+  color: var(--dark-green);
+  border: 1px solid rgba(42, 157, 143, 0.4);
+}
+
+.products-section.is-light .hero-style-button:hover,
+.products-section.is-light .hero-style-button:focus {
+  background-color: rgba(42, 157, 143, 0.08);
+  color: var(--dark-green);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Rodapé (Ver mais) */
+.products-footer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--space-32);
+}
+
+/* Reveal-in */
+.reveal-in {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-in,
+  .reveal-in.is-visible {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+  .products-section {
+    padding-block: var(--space-32);
+  }
+  
+  .products-inner {
+    gap: var(--space-16);
+  }
+  
+  .products-list { 
+    gap: var(--space-16); 
+  }
+  
+  .products-heading {
+    margin-block-end: var(--space-8);
+  }
+  
+  .products-subtitle {
+    margin-block-end: var(--space-12);
+  }
+  
+  .products-footer {
+    margin-block-start: var(--space-24);
+  }
+}
+
+@media (max-width: 600px) {
+  .products-section {
+    padding-block: var(--space-24);
+  }
+  
+  .products-list { 
+    gap: var(--space-12); 
+  }
+  
+  .products-section { 
+    --products-side-gap: var(--space-12); 
+  }
+  
+  .products-empty {
+    padding: var(--space-16);
+    margin-block: var(--space-12);
+  }
+  
+  .products-footer {
+    margin-block-start: var(--space-20);
+  }
+  
+  .hero-style-button {
+    padding: 10px 20px;
+    font-size: var(--fs-14);
+  }
+}

@@ -1,0 +1,21 @@
+.formButton{
+  padding: 1.5rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 3rem;
+  width: 100%;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--text-color-white);
+  font-weight: 600;
+  transition: ease 0.3s transform;
+  max-width: 15rem;
+  text-align: center;
+}
+
+.formButton:hover{
+  cursor: pointer;
+  transform: scale(1.050);
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+  box-shadow: var(--shadow-sm);
+}

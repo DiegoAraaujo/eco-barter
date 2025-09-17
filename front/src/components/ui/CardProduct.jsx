@@ -1,27 +1,30 @@
 import "../../styles/cardProduct.css";
+import { Link } from "react-router-dom";
 
 import BiggerButton from "../ui/BiggerButton";
 import SmallerButton from "../ui/SmallerButton";
 
 function cardProduct({
-  image,
-  imageDescription,
-  productName,
+  id,
+  imageUrl,
+  nameProduct,
   location,
-  productState,
+  itemCondition,
 }) {
   return (
     <div className="card-product">
       <div className="product-image">
-        <img src={image} alt={imageDescription} />
+        <img src={imageUrl} alt={nameProduct} />
       </div>
       <div className="product-information">
-        <p className="productName">{productName}</p>
+        <p className="productName">{nameProduct}</p>
         <p className="locationProduct">{location}</p>
-        <p className="productState">{productState}</p>
+        <p className="productState">{itemCondition}</p>
       </div>
       <div className="product-actions">
-        <SmallerButton buttonMessage="Ver Detalhes" />
+        <Link className="linkProduct" to={`/item/${id}`}>
+          <SmallerButton buttonMessage="Ver Detalhes" />
+        </Link>
         <SmallerButton buttonMessage="Propor troca" />
       </div>
     </div>

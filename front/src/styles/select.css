@@ -1,0 +1,10 @@
+select {
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--bg-color);
+}
+
+select:focus {
+  outline: none;
+  background-color: var(--bg-color);
+}

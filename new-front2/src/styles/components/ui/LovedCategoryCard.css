@@ -1,0 +1,189 @@
+/* src/styles/components/ui/LovedCategoryCard.css - REVISADO E SIMPLIFICADO */
+
+/* Variáveis CSS para consistência */
+:root {
+  --lcc-card-bg: var(--card-color, #ffffff);
+  --lcc-border: var(--border-color, #e5e7eb);
+  --lcc-text: var(--text-color-black, #1f2937);
+  --lcc-text-muted: var(--text-color-muted, #6b7280);
+  --lcc-primary: var(--primary-color, #3a7e35);
+  --lcc-bg-light: var(--bg-color-light, #f9fafb);
+}
+
+/* Botão/Link base */
+.loved-category-card {
+  appearance: none;
+  background: var(--lcc-card-bg);
+  color: var(--lcc-text);
+  border: 1px solid var(--lcc-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  transition: var(--elevate);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+
+  padding: var(--space-16);
+  width: 13rem;            /* encaixa no carrossel */
+  flex-shrink: 0;
+  text-align: center;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;   /* caso seja <Link> */
+  position: relative;
+  min-height: 140px;       /* altura mínima consistente */
+}
+
+/* Estados */
+.loved-category-card:hover,
+.loved-category-card:focus-within { 
+  transform: translateY(-2px); 
+  box-shadow: var(--shadow-sm); 
+  border-color: var(--lcc-primary);
+}
+
+.loved-category-card:active { 
+  transform: translateY(-1px); 
+}
+
+.loved-category-card:focus-visible { 
+  outline: 2px solid var(--lcc-primary); 
+  outline-offset: 3px; 
+  border-radius: 8px; 
+}
+
+/* Selecionado */
+.loved-category-card--selected {
+  border-color: var(--lcc-primary);
+  box-shadow: 0 0 0 3px rgba(58, 126, 53, 0.16), var(--shadow-sm);
+  background-color: rgba(58, 126, 53, 0.05);
+}
+
+/* Desabilitado */
+.loved-category-card--disabled,
+.loved-category-card:disabled,
+.loved-category-card[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: var(--shadow-xs) !important;
+  background-color: var(--lcc-bg-light);
+}
+
+/* Ícone */
+.loved-category-card__icon {
+  display: grid;
+  place-items: center;
+  height: 60px;
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.loved-category-card__icon img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.loved-category-card:hover .loved-category-card__icon img {
+  transform: scale(1.05);
+}
+
+/* Título */
+.loved-category-card__name {
+  font-size: var(--fs-14);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+  color: var(--lcc-text);
+}
+
+/* Container de informações */
+.loved-category-card__info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: auto; /* Empurra para baixo */
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--lcc-border);
+}
+
+/* Contador de itens */
+.loved-category-card__count {
+  font-size: var(--fs-12);
+  color: var(--lcc-text-muted);
+  background-color: var(--lcc-bg-light);
+  padding: var(--space-4) var(--space-8);
+  border-radius: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Estados de hover para feedback visual */
+.loved-category-card:hover .loved-category-card__count {
+  background-color: var(--lcc-primary);
+  color: white;
+}
+
+/* Reduz movimento */
+@media (prefers-reduced-motion: reduce) {
+  .loved-category-card,
+  .loved-category-card__icon img {
+    transition: none;
+  }
+  
+  .loved-category-card:hover,
+  .loved-category-card:active {
+    transform: none;
+  }
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 480px) {
+  .loved-category-card {
+    width: 11rem;
+    padding: var(--space-12);
+    min-height: 120px;
+    gap: var(--space-8);
+  }
+  
+  .loved-category-card__icon {
+    height: 50px;
+    width: 50px;
+  }
+  
+  .loved-category-card__name {
+    font-size: var(--fs-13);
+  }
+  
+  .loved-category-card__info {
+    padding-top: var(--space-6);
+  }
+  
+  .loved-category-card__count {
+    font-size: var(--fs-10);
+    padding: var(--space-2) var(--space-4);
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .loved-category-card {
+    --lcc-card-bg: var(--card-color-dark, #1f2937);
+    --lcc-border: var(--border-color-dark, #374151);
+    --lcc-text: var(--text-color-white, #f9fafb);
+    --lcc-text-muted: var(--text-color-muted-dark, #9ca3af);
+    --lcc-bg-light: var(--bg-color-light-dark, #374151);
+  }
+  
+  .loved-category-card__count {
+    background-color: var(--lcc-bg-light);
+    color: var(--lcc-text-muted);
+  }
+}
