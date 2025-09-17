@@ -1,0 +1,95 @@
+/* register.css */
+
+/* Corpo da página */
+.register-page {
+  max-width: 450px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  border-radius: 15px;
+  background-color: #ffffff; /* fundo branco */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título */
+.register-page h1 {
+  text-align: center;
+  color: #2e7d32; /* verde escuro */
+  font-size: 28px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Formulário */
+.register-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Cada campo do formulário */
+.register-page form div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Labels */
+.register-page label {
+  font-weight: 500;
+  color: #2e7d32;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* Inputs */
+.register-page input {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s;
+  background-color: #f9fff9; /* verde bem clarinho */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Input focado */
+.register-page input:focus {
+  border-color: #66bb6a; /* verde vibrante */
+  box-shadow: 0 4px 10px rgba(102, 187, 106, 0.3);
+  outline: none;
+}
+
+/* Botão */
+.register-page button {
+  padding: 14px;
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+  width: 100%; /* botão ocupa mesma largura dos inputs */
+}
+
+/* Botão hover */
+.register-page button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(46, 125, 50, 0.4);
+}
+
+/* Responsividade */
+@media (max-width: 500px) {
+  .register-page {
+    margin: 20px;
+    padding: 30px 20px;
+  }
+}
