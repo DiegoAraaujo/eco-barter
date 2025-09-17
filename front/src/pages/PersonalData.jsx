@@ -31,7 +31,7 @@ export default function PersonalData() {
     return (
         <main id="conteudo" className="main-dados">
             <Header />
-            <h1 className="titulo-dados">Dados Pessoais</h1>
+            <h1>Dados Pessoais</h1>
 
             <div className="dados-box">
                 <form className="dados-form" onSubmit={handleSubmit} noValidate>
