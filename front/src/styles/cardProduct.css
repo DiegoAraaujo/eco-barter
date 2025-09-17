@@ -36,6 +36,11 @@
 .locationProduct {
   font-size: 1.2rem;
 }
+
+.linkProduct {
+  text-decoration: none;
+}
+
 .productState {
   font-size: 1rem;
   opacity: 80%;

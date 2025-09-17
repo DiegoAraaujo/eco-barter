@@ -1,0 +1,32 @@
+.mainListFilter {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.filter{
+  all: unset;
+  min-width: 7rem;
+  color: var(--text-color-black);
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: ease 0.3s transform;
+  text-align: center;
+  font-size: 1.3rem;
+  width: 100%;
+  text-align: start;
+}
+
+.filter:hover{
+  cursor: pointer;
+  transform: scale(1.050);
+  color: var(--bg-color);
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}

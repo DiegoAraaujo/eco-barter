@@ -9,6 +9,7 @@ import MyArea from "./pages/MyArea";
 import PersonalData from "./pages/PersonalData";
 import Item from "./pages/Item";
 import AddItem from "./pages/AddItem";
+import CatalogPage from "./pages/CatalogPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<WelcomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/myarea" element={<MyArea />} />
+          <Route path="/catalogpage" element={<CatalogPage />} />
           <Route path="/personal-data" element={<PersonalData />} />
           <Route path="/item/:id" element={<Item />} />
           <Route path="/additem" element={<AddItem />} />

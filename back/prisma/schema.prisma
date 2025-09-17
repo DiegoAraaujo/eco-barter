@@ -26,6 +26,19 @@ enum ExchangeStatus {
   COMPLETED
 }
 
+enum categoryName {
+  BRINQUEDOS
+  CALCADOS
+  CELULARES
+  ELETRODOMESTICOS
+  ESPORTES
+  INFORMATICA
+  JARDINAGEM
+  LIVROS
+  MOVEIS
+  ROUPAS
+}
+
 model Account {
   id  Int   @id   @default(autoincrement())
   name  String?
@@ -50,7 +63,7 @@ model Item {
   name  String?
   registeredAt DateTime?
   imageUrl  String?
-  category  String?
+  category  categoryName?
   description String?
   status  ItemStatus?
   condition  ItemCondition?
