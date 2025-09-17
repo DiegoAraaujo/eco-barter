@@ -23,6 +23,7 @@ function App() {
           <Route path="/catalogpage" element={<CatalogPage />} />
           <Route path="/personal-data" element={<PersonalData />} />
           <Route path="/item/:id" element={<Item />} />
+          <Route path="/additem" element={<AddItem />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
