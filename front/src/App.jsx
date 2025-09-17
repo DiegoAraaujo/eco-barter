@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import MyArea from "./pages/MyArea";
 import PersonalData from "./pages/PersonalData";
 import Item from "./pages/Item";
+import AddItem from "./pages/AddItem";
 import CatalogPage from "./pages/CatalogPage";
 
 function App() {
