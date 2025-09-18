@@ -37,9 +37,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--overlay-light);
-  width: 100%;
-  max-width: 640px;
+  background-color: var(--form-color);
+  width: 720px;
   padding: 3rem 2rem;
   border-radius: 30px;
   row-gap: 2rem;
