@@ -58,22 +58,22 @@ model Account {
 }
 
 model Item {
-  id  Int @id @default(autoincrement())
-  accountId Int
-  name  String?
-  registeredAt DateTime?
-  imageUrl  String?
-  category  categoryName?
+  id         Int            @id @default(autoincrement())
+  accountId  Int
+  name       String?
+  registeredAt DateTime?     @default(now())
+  imageUrl   String?
+  category   categoryName?
   description String?
-  status  ItemStatus?
+  status     ItemStatus?     @default(AVAILABLE)  // Default definido aqui
   condition  ItemCondition?
 
-  account Account @relation("AccountItems", fields: [accountId], references: [id])
+  account    Account         @relation("AccountItems", fields: [accountId], references: [id])
 
-  sentExchanges Exchange[] @relation("ItemSender")
-
-  recExchanges Exchange[] @relation("ItemReceiver")
+  sentExchanges  Exchange[]  @relation("ItemSender")
+  recExchanges   Exchange[]  @relation("ItemReceiver")
 }
+
 
 model Exchange {
   id  Int @id @default(autoincrement())

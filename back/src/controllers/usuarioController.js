@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-
+import jwt from "jsonwebtoken";
 import { JWTSign } from "../utils/jwt.js";
 import {
   getAllUsuarios,
@@ -39,17 +39,17 @@ export const getUsuarioByIdHandler = async (req, res) => {
 };
 
 export const addUsuarioHandler = async (req, res) => {
-  const { nome, fullName, email, phone, city, state, password } = req.body;
+  const { name, fullName, email, phone, city, state, password } = req.body;
 
   const encryptedPassword = bcrypt.hashSync(password, bcryptSalt);
 
-  if (!nome) {
+  if (!name) {
     return res.status(400).json({ error: "Nome é obrigatório" });
   }
 
   try {
     const account = await addUsuario(
-      nome,
+      name,
       fullName,
       email,
       phone,
@@ -58,7 +58,26 @@ export const addUsuarioHandler = async (req, res) => {
       encryptedPassword
     );
 
-    res.status(201).json(account);
+    const accountSafe = {
+      id: account.id,
+      name,
+      fullName,
+      email,
+      phone,
+      city,
+      state,
+    };
+
+    const token = await JWTSign(accountSafe);
+
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: false,
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .json(accountSafe);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -110,7 +129,6 @@ export const deleteUsuarioHandler = async (req, res) => {
 
 export const userAuthHandler = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await getUsuarioByEmail(email);
 
@@ -124,12 +142,28 @@ export const userAuthHandler = async (req, res) => {
       return res.status(401).json({ error: "Senha inválida" });
     }
 
-    const { id, name, registeredAt, fullName, phone, city, state } = user;
-    const payload = { id, name, registeredAt, fullName, phone, city, state };
+    const payload = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      registeredAt: user.registeredAt,
+      fullName: user.fullName,
+      phone: user.phone,
+      city: user.city,
+      state: user.state,
+    };
 
     const token = await JWTSign(payload);
 
-    res.status(200).json({ user: payload, token });
+    res
+      .status(200)
+      .cookie("token", token, {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false,
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .json(payload);
 
   } catch (error) {
     console.error(error);
@@ -137,3 +171,18 @@ export const userAuthHandler = async (req, res) => {
   }
 };
 
+export const getMe = (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ error: "Não autenticado" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+    res.status(200).json(decoded);
+  } catch (err) {
+    res.status(401).json({ error: "Token inválido ou expirado" });
+  }
+};

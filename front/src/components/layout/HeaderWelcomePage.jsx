@@ -11,7 +11,9 @@ function headerWelcomePage() {
         <Link to="/login">
           <SmallerButton buttonMessage="Login" />
         </Link>
-        <SmallerButton buttonMessage="Registrar-se" />
+        <Link to="/register">
+          <SmallerButton buttonMessage="Registrar-se" />
+        </Link>
       </div>
     </header>
   );

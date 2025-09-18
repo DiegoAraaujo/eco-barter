@@ -1,100 +1,167 @@
 import { useState } from "react";
-import InputFile from "../ui/InputFile.jsx";
-import Select from "../ui/Select.jsx";
 import FormButton from "../ui/FormButton.jsx";
 import "../../styles/form.css";
+import { useUserContext } from "../../contexts/UserContext.jsx";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+function Form() {
+  const { user } = useUserContext();
+  const navigate = useNavigate();
 
-function Form(){
-    const [fileInputKey, setFileInputKey] = useState(Date.now());
+  const categoryOpt = [
+    { value: "BRINQUEDOS", label: "Brinquedos" },
+    { value: "CALCADOS", label: "Calçados" },
+    { value: "CELULARES", label: "Celulares" },
+    { value: "ELETRODOMESTICOS", label: "Eletrodomésticos" },
+    { value: "ESPORTES", label: "Esportes" },
+    { value: "INFORMATICA", label: "Informática" },
+    { value: "JARDINAGEM", label: "Jardinagem" },
+    { value: "LIVROS", label: "Livros" },
+    { value: "MOVEIS", label: "Móveis" },
+    { value: "ROUPAS", label: "Roupas" },
+  ];
 
-    const categoryOpt=[
-        {value: "Roupas", label: "Roupas"},
-        { value: "Brinquedos", label: "Brinquedos" },
-        { value: "Eletrodoméstico", label: "Eletrodoméstico" }
-    ];
-    const districtOpt = [
-        { value: "district1", label: "Bairro 1" },
-        { value: "district2", label: "Bairro 2" },
-        { value: "district3", label: "Bairro 3" }
-    ];
+  const conditionOpt = [
+    { value: "NEW", label: "Novo" },
+    { value: "USED", label: "Usado" },
+    { value: "REFURBISHED", label: "Reformado" },
+  ];
 
-    const [formData, setFormData] = useState({
-        name: "",
-        description: "",
-        category: "",
-        district: "",
-        img: null,
-        userId: 1,
-    });
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [district, setDistrict] = useState("");
+  const [img, setImg] = useState("");
+  const [condition, setCondition] = useState("");
+
+  if (!user) {
+    return <p>Você precisa estar logado!</p>;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      !name.trim() ||
+      !description.trim() ||
+      !category ||
+      !img.trim() ||
+      !condition
+    ) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return;
     }
-    const handleFileChange = (file) => {
-        setFormData({ ...formData, img: URL.createObjectURL(file) });
+
+    try {
+      const itemCreated = await axios.post("http://localhost:3000/item", {
+        name,
+        description,
+        category,
+        district,
+        imageUrl: img,
+        condition,
+        accountId: user.id,
+      });
+
+      setName("");
+      setDescription("");
+      setCategory("");
+      setDistrict("");
+      setImg("");
+      setCondition("");
+
+      navigate("/myarea");
+    } catch (error) {
+      console.error("Erro ao criar item:", error);
     }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (
-            !formData.name.trim() ||
-            !formData.description.trim() ||
-            !formData.category ||
-            !formData.img
-        ) {
-            alert("Por favor, preencha todos os campos obrigatórios.");
-            return;
-        }
+  };
 
-        setFormData({
-            name: "",
-            description: "",
-            category: "",
-            district: "",
-            img: null,
-            userId: 1     
-        });
-        setFileInputKey(Date.now());
-        
-    }
-    return(
-        <>
-            <main className="form-container">
-                <h3 className="textTopForm">Cadastrar novo item</h3>
-                <div>
-                    <form className="form-box" onSubmit={handleSubmit}>
+  return (
+    <main className="form-container">
+      <h3 className="textTopForm">Cadastrar novo item</h3>
+      <div>
+        <form className="form-box" onSubmit={handleSubmit}>
+          <label>
+            Título do item
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
 
-                        <label>   
-                            Título do item
-                            <input type="text" name="name" value={formData.name} onChange={handleChange} />
-                        </label>
+          <label>
+            Descrição do item
+            <input
+              type="text"
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </label>
 
-                        <label>
-                            Descrição do item
-                            <input type="text" name="description" value={formData.description} onChange={handleChange} />
-                        </label>
-                        <Select
-                            label="Categoria"
-                            name="category"
-                            options={categoryOpt}
-                            value={formData.category}
-                            onChange={handleChange}
-                            required
-                        />
-                        <Select
-                            label="Local"
-                            name="district"
-                            options={districtOpt}
-                            value={formData.district}
-                            onChange={handleChange}
-                        />
+          <label>
+            Categoria
+            <select
+              name="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            >
+              <option value="">Selecione</option>
+              {categoryOpt.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
 
-                        <InputFile text="Foto do Item" key={fileInputKey} onFileChange={handleFileChange} />
+          <label>
+            Condição
+            <select
+              name="condition"
+              value={condition}
+              onChange={(e) => setCondition(e.target.value)}
+              required
+            >
+              <option value="">Selecione</option>
+              {conditionOpt.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
 
-                        <FormButton buttonMessage="Enviar"></FormButton>
-                    </form>
-                </div>
-            </main>
-        </>
-    );
+          <label>
+            Local
+            <input
+              type="text"
+              name="district"
+              placeholder="Digite o bairro ou cidade"
+              value={district}
+              onChange={(e) => setDistrict(e.target.value)}
+            />
+          </label>
+
+          <label>
+            URL da Imagem
+            <input
+              type="text"
+              name="img"
+              placeholder="Cole a URL da imagem"
+              value={img}
+              onChange={(e) => setImg(e.target.value)}
+            />
+          </label>
+
+          <FormButton buttonMessage="Enviar" />
+        </form>
+      </div>
+    </main>
+  );
 }
+
 export default Form;

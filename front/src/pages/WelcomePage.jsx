@@ -3,11 +3,24 @@ import PopularCategories from "../components/layout/PopularCategories";
 import AvailableProducts from "../components/layout/AvailableProducts";
 import CallSection from "../components/layout/CallSection";
 import HeaderWelcomePage from "../components/layout/HeaderWelcomePage";
+import { useUserContext } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-function welcomePage() {
+function WelcomePage() {
+  const { user, ready } = useUserContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user && ready) {
+      navigate("/catalogpage"); 
+    }
+  }, [user, ready, navigate]);
+
+
   return (
     <section>
-      <HeaderWelcomePage/>
+      <HeaderWelcomePage />
       <HeroBanner />
       <PopularCategories />
       <AvailableProducts />
@@ -16,4 +29,4 @@ function welcomePage() {
   );
 }
 
-export default welcomePage;
+export default WelcomePage;

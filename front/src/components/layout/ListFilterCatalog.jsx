@@ -2,27 +2,35 @@ import "../../styles/listFilterCatalog.css";
 
 function ListFilterCatalog({ onFilterChange, selectedCategory }) {
   const categories = [
-    "Todas as categorias",
-    "Eletrodomésticos",
-    "Calçado",
-    "Brinquedos",
-    "Celulares",
-    "Roupas"
+    { front: "Todas as categorias", toBack: "TODAS AS CATEGORIAS" },
+    { front: "Brinquedos", toBack: "BRINQUEDOS" },
+    { front: "Calçados", toBack: "CALCADOS" },
+    { front: "Celulares", toBack: "CELULARES" },
+    { front: "Eletrodomesticos", toBack: "ELETRODOMESTICOS" },
+    { front: "Esportes", toBack: "ESPORTES" },
+    { front: "Informatica", toBack: "INFORMATICA" },
+    { front: "Jardinagem", toBack: "JARDINAGEM" },
+    { front: "Livros", toBack: "LIVROS" },
+    { front: "Moveis", toBack: "MOVEIS" },
+    { front: "Roupas", toBack: "ROUPAS" },
   ];
 
   return (
     <>
       <main className="mainListFilter">
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <button
-            key={category}
-            className={`filter ${selectedCategory === category ? 'active' : ''}`}
-            onClick={() => onFilterChange(category)}
+            style={{ fontSize: "10px" }}
+            key={index}
+            className={`filter ${
+              selectedCategory === category.toBack ? "active" : ""
+            }`}
+            onClick={() => onFilterChange(category.toBack)}
           >
-            {category}
+            {category.front}
           </button>
         ))}
-      </main> 
+      </main>
     </>
   );
 }

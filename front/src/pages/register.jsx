@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../styles/pages/register.css";
+import { useUserContext } from "../contexts/UserContext";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { setUser } = useUserContext();
+
   const [name, setName] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,9 +30,21 @@ const Register = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:3000/usuarios", userData);
-      console.log("Usuário cadastrado com sucesso:", response.data);
-      // Limpar formulário após cadastro
+      const isValidPhone = /^\+?\d{0,3}\s?\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/.test(
+        phone
+      );
+
+      if (!isValidPhone) {
+        alert("insira um telefone valido!");
+        return;
+      }
+
+      const userCreated = await axios.post(
+        "http://localhost:3000/usuarios",
+        userData,
+        { withCredentials: true }
+      );
+
       setName("");
       setFullName("");
       setEmail("");
@@ -35,15 +52,20 @@ const Register = () => {
       setPhone("");
       setCity("");
       setState("");
-      alert("Usuário cadastrado com sucesso!");
+
+      setUser(userCreated.data);
+      navigate("/catalogpage");
     } catch (error) {
-      console.error("Erro ao cadastrar usuário:", error.response?.data || error.message);
+      console.error("Erro ao cadastrar usuário:", error);
       alert("Erro ao cadastrar usuário. Verifique os dados e tente novamente.");
     }
   };
 
   return (
-    <div className="register-page" style={{ maxWidth: "500px", margin: "0 auto" }}>
+    <div
+      className="register-page"
+      style={{ maxWidth: "500px", margin: "0 auto" }}
+    >
       <h1>Registrar Usuário</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -92,6 +114,7 @@ const Register = () => {
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            placeholder="(XX) XXXXX-XXXX"
           />
         </div>
 

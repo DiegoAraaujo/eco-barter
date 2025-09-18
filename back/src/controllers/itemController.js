@@ -47,7 +47,7 @@ const getItemByIdHandler = async(req, res) => {
 }
 
 const addItemHandler = async(req, res) => {
-  const {name, imageUrl, category, description, status, condition, accountId} = req.body;
+  const {name, imageUrl, category, description, condition, accountId} = req.body;
 
   if (!name || !accountId || !description) {
     return res.status(400).json({error: "Dados incompletos."})
@@ -58,7 +58,7 @@ const addItemHandler = async(req, res) => {
   }
 
   try {
-    const newItem = await addItem(name, imageUrl, category, description, status, condition, parseInt(accountId));
+    const newItem = await addItem(name, imageUrl, category, description, condition, parseInt(accountId));
     res.status(201).json(newItem);
   } catch(error) {
     res.status(500).json({error: error.message || "Erro ao adicionar item."});

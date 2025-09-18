@@ -1,5 +1,5 @@
 import prisma from "../prisma.js";
-import { ItemStatus, ItemCondition } from "@prisma/client";
+import { ItemCondition } from "@prisma/client";
 
 const getAllItems = async (accountId) => {
   return prisma.item.findMany({
@@ -18,23 +18,21 @@ const getItemById = async (id) => {
       id: id,
     },
     include: {
-      account: true, // Carrega os dados da conta dona do item
+      account: true,
 
       sentExchanges: {
-        // Histórico de quando o item foi oferecido em trocas
         include: {
-          receiverItem: true, // Item que foi recebido em troca
-          receiverAccount: true, // Conta que recebeu este item
-          reviews: true, // Avaliações desta troca
+          receiverItem: true,
+          receiverAccount: true,
+          reviews: true,
         },
       },
 
       recExchanges: {
-        // Histórico de quando outros queriam este item em troca
         include: {
-          senderItem: true, // Item que foi oferecido em troca
-          senderAccount: true, // Conta que ofereceu o item
-          reviews: true, // Avaliações desta troca
+          senderItem: true,
+          senderAccount: true,
+          reviews: true,
         },
       },
     },
@@ -46,7 +44,6 @@ const addItem = async (
   imageUrl,
   category,
   description,
-  status,
   condition,
   accountId
 ) => {
@@ -57,7 +54,6 @@ const addItem = async (
       imageUrl: imageUrl,
       category: category,
       description: description,
-      status: status || ItemStatus.AVAILABLE,
       condition: condition || ItemCondition.NEW,
       accountId: accountId,
     },
@@ -122,7 +118,7 @@ const getAllItemsCatalog = async (category) => {
     where: category ? { category: category } : {},
     orderBy: { name: "asc" },
     include: {
-      account: true, // para trazer dados do dono do item
+      account: true,
     },
   });
 };

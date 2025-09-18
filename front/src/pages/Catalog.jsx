@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/pages/register.css"; // pode usar o mesmo estilo
+import "../styles/pages/register.css"; 
 
 const Catalog = () => {
   const [items, setItems] = useState([]);
-  const [category, setCategory] = useState(""); // filtro por categoria
-  const [categories, setCategories] = useState([]); // lista de categorias disponíveis
-
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
   // Buscar itens do back-end
   const fetchItems = async () => {
     try {
       const response = await axios.get("http://localhost:3000/items", {
-        params: { category: category || undefined }, // envia categoria se houver filtro
+        params: { category: category || undefined },
       });
       setItems(response.data);
       
-      // Extrair categorias únicas para o filtro
       const uniqueCategories = [...new Set(response.data.map(item => item.category))];
       setCategories(uniqueCategories);
     } catch (error) {
@@ -25,7 +23,7 @@ const Catalog = () => {
 
   useEffect(() => {
     fetchItems();
-  }, [category]); // re-fetch quando o filtro mudar
+  }, [category]);
 
   return (
     <div className="register-page" style={{ maxWidth: "700px", margin: "50px auto" }}>
