@@ -1,5 +1,5 @@
-import logo1 from "../../assets/logo1.png";
-import BiggerButton from "../ui/BiggerButton";
+import Logo from "../../assets/logo.svg";
+import SmallerButton from "../ui/SmallerButton";
 import { Link } from "react-router-dom";
 
 import "../../styles/header.css";
@@ -7,14 +7,17 @@ function Header() {
   return (
     <>
       <header className="header-top">
-        <div className="header-buttons">
-          <img src={logo1} alt="LogoHeader" />
-
-          <BiggerButton buttonMessage="Início" />
-          <Link to="/additem">
-            <BiggerButton buttonMessage="Cadastrar Item" />
+        <img src={Logo} alt="Logo do site" />
+        <div className="header-actions">
+          <Link to="/myarea">
+            <SmallerButton buttonMessage="Minha Area" />
           </Link>
-          <BiggerButton buttonMessage="Sair" />
+          <Link to="/additem">
+            <SmallerButton buttonMessage="Cadastrar Item" />
+          </Link>
+          <Link to="/catalogpage">
+            <SmallerButton buttonMessage="Catálogo" />
+          </Link>
         </div>
       </header>
     </>

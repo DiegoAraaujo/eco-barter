@@ -1,15 +1,27 @@
 .header-top {
-  background-color: var(--primary-color);
-  width: 100%;
+  padding: 1rem 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--dark-green);
+  gap: 2rem;
 }
 
-.header-top img {
-  width: 14rem;
-  padding-left: 4rem;
-}
-.header-buttons{
-    display:flex;
-    justify-content: space-between;
+@media (max-width: 900px) {
+  .header-top {
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 1rem 4rem;
+    margin: 0;
+    width: 100%;
+    padding: 5rem;
+  }
+}
+
+.header-actions{
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-end;
 }
