@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/pages/register.css";
@@ -6,7 +6,7 @@ import { useUserContext } from "../contexts/UserContext";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { setUser } = useUserContext();
+  const { user, setUser } = useUserContext();
 
   const [name, setName] = useState("");
   const [fullName, setFullName] = useState("");
@@ -15,6 +15,12 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      navigate("/catalogpage");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,11 +36,7 @@ const Register = () => {
     };
 
     try {
-      const isValidPhone = /^\+?\d{0,3}\s?\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/.test(
-        phone
-      );
-
-      if (!isValidPhone) {
+      if (!phone.trim()) {
         alert("insira um telefone valido!");
         return;
       }
