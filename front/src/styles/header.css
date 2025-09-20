@@ -25,3 +25,12 @@
   width: 100%;
   justify-content: flex-end;
 }
+
+@media (max-width: 900px) {
+  .header-actions {
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+  }
+}
