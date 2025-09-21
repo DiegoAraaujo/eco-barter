@@ -52,10 +52,10 @@ export default function Item() {
   const location = item.account ? `${item.account.city}, ${item.account.state}` : "";
 
   const meta = [
-    { label: "Categoria", value: item.category },
-    { label: "Condição", value: CONDITION_LABEL[item.condition] || "" },
-    { label: "Status", value: STATUS_LABEL[item.status] || "" },
-    { label: "Localização", value: location },
+    { label: "Categoria:", value: item.category },
+    { label: "Condição:", value: CONDITION_LABEL[item.condition] || "" },
+    { label: "Status:", value: STATUS_LABEL[item.status] || "" },
+    { label: "Localização:", value: location },
   ].filter((m) => m.value);
 
   return (
@@ -83,7 +83,7 @@ export default function Item() {
             )}
 
             <div className="descricao-item">
-              <h3 className="descricao-title">Descrição</h3>
+              <h3 className="descricao-title">Descrição:</h3>
               <p>{item.description || "Sem descrição."}</p>
             </div>
           </section>
