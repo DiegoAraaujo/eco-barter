@@ -67,18 +67,33 @@ const addItemHandler = async(req, res) => {
 
 const updateItemHandler = async(req, res) => {
   const id = parseInt(req.params.id);
-  const {name, imageUrl, category, description, status, condition} = req.body;
+  const { name, imageUrl, category, description, status, condition } = req.body;
   
   if (!id) {
-    res.status(400).json({error: "ID não existe."})
+    return res.status(400).json({error: "ID não existe."})
   }
 
-  if (!name || !imageUrl || !category || !description || !status || !condition) {
+  const hasUpdates = name !== undefined || 
+                    imageUrl !== undefined || 
+                    category !== undefined || 
+                    description !== undefined || 
+                    status !== undefined || 
+                    condition !== undefined;
+
+  if (!hasUpdates) {
     return res.status(400).json({error: "Pelo menos um dos campos deve ser alterado para atualizar."})
   }
 
   try {
-    const updatedItem = await updateItem(id, name, imageUrl, category, description, status, condition);
+    const updatedItem = await updateItem(
+      id, 
+      name, 
+      imageUrl, 
+      category, 
+      description, 
+      status, 
+      condition
+    );
     res.status(200).json(updatedItem);
   } catch(error) {
     res.status(500).json({error: "Não foi possível atualizar o item."})
