@@ -1,5 +1,3 @@
-import HeaderLogin from "../components/layout/headerLogin";
-import Footer from "../components/layout/Footer";
 import "../styles/login.css";
 import logo2 from "../assets/logo2.png";
 import BiggerButton from "../components/ui/BiggerButton";
@@ -70,7 +68,7 @@ function Login() {
               <BiggerButton buttontype="submit" buttonMessage="Entrar" />
             </form>
             <p className="textBottomForm">
-              Ainda não tem conta? <a href="#">Cadastre-se</a>
+              Ainda não tem conta? <a href="/register">Cadastre-se</a>
             </p>
           </div>
         </main>

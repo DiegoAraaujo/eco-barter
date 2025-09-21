@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../styles/pages/register.css";
+import "../styles/register.css";
 import { useUserContext } from "../contexts/UserContext";
 
 const Register = () => {
@@ -64,83 +64,87 @@ const Register = () => {
   };
 
   return (
-    <div
-      className="register-page"
-      style={{ maxWidth: "500px", margin: "0 auto" }}
-    >
-      <h1>Registrar Usuário</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome de Usuário:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+    <>
+      <div className="page">
+        <div
+          className="register-page"
+          style={{ maxWidth: "500px", margin: "0 auto" }}
+        >
+          <h1>Registrar Usuário</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Nome de Usuário:</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
 
-        <div>
-          <label>Nome Completo:</label>
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          />
-        </div>
+            <div>
+              <label>Nome Completo:</label>
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+              />
+            </div>
 
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+            <div>
+              <label>Email:</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-        <div>
-          <label>Senha:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+            <div>
+              <label>Senha:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-        <div>
-          <label>Telefone:</label>
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="(XX) XXXXX-XXXX"
-          />
-        </div>
+            <div>
+              <label>Telefone:</label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="(XX) XXXXX-XXXX"
+              />
+            </div>
 
-        <div>
-          <label>Cidade:</label>
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </div>
+            <div>
+              <label>Cidade:</label>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
 
-        <div>
-          <label>Estado:</label>
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-          />
-        </div>
+            <div>
+              <label>Estado:</label>
+              <input
+                type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+            </div>
 
-        <button type="submit">Registrar</button>
-      </form>
-    </div>
+            <button type="submit">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 

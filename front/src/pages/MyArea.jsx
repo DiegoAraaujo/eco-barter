@@ -38,7 +38,7 @@ function MyArea() {
   if (items.length === 0) return <p>Você ainda não cadastrou itens.</p>;
 
   return (
-    <main>
+    <main className="main-container">
       <h1>Minha Área</h1>
       <section className="items-section">
         <div className="items-wrapper">
