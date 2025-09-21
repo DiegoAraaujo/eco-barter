@@ -4,6 +4,7 @@ import CardMyProduct from "../components/ui/CardMyProduct";
 import SmallerButton from "../components/ui/SmallerButton";
 import "../styles/myArea.css";
 import { useUserContext } from "../contexts/UserContext";
+import { Link } from "react-router-dom";
 
 function MyArea() {
   const { user } = useUserContext();
@@ -54,7 +55,9 @@ function MyArea() {
                 productState={item.status}
               >
                 <div>
-                  <SmallerButton buttonMessage="Editar" />
+                  <Link to={`/edit-item/${item.id}`}>
+                    <SmallerButton buttonMessage="Editar" />
+                  </Link>
                   <SmallerButton buttonMessage="Remover" />
                 </div>
               </CardMyProduct>
