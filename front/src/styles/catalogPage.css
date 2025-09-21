@@ -125,3 +125,10 @@
     padding-bottom: 5rem;
   }
 }
+
+.card-product img{
+  width: 20rem;   
+  height: 15rem;  
+  object-fit: cover; 
+  border-radius: 0.5rem;
+}

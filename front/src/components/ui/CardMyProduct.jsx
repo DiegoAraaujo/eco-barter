@@ -4,7 +4,7 @@ import "../../styles/cardMyProduct.css";
 //import SmallerButton from "../ui/SmallerButton";
 
 function CardMyProduct({
-  image,
+  imageUrl,
   imageDescription,
   productName,
   children,
@@ -14,7 +14,7 @@ function CardMyProduct({
   return (
     <div className="card-my-product">
       <div className="my-product-image">
-        <img src={image} alt={imageDescription} />
+        <img src={imageUrl} alt={imageDescription} />
       </div>
       <div className="my-product-information">
         <p className="my-productName">{productName}</p>

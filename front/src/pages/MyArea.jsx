@@ -67,7 +67,7 @@ function MyArea() {
             {items.map((item) => (
               <CardMyProduct
                 key={item.id}
-                image={item.imageUrl}
+                imageUrl={item.imageUrl}
                 imageDescription={item.description}
                 productName={item.name}
                 category={item.category}
