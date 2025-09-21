@@ -4,12 +4,31 @@ import CardMyProduct from "../components/ui/CardMyProduct";
 import SmallerButton from "../components/ui/SmallerButton";
 import "../styles/myArea.css";
 import { useUserContext } from "../contexts/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function MyArea() {
   const { user } = useUserContext();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const handleDeleteItem = async (id) => {
+    
+    if (!window.confirm("Tem certeza que deseja excluir este item?")) {
+      return;
+    }
+
+    try {
+      await axios.delete(`http://localhost:3000/item/${id}`);
+      alert("Item excluído com sucesso!");
+      navigate("/myarea");
+      setItems(prevItems => prevItems.filter(item => item.id !== id));
+    } catch(error) {
+      console.error("Erro ao excluir o item:", error);
+      alert("Erro ao excluir o item.");
+    }
+  };
 
   useEffect(() => {
     if (!user?.id) {
@@ -54,11 +73,11 @@ function MyArea() {
                 category={item.category}
                 productState={item.status}
               >
-                <div>
+                <div className="box-button">
                   <Link to={`/edit-item/${item.id}`}>
                     <SmallerButton buttonMessage="Editar" />
                   </Link>
-                  <SmallerButton buttonMessage="Remover" />
+                  <button onClick={() => handleDeleteItem(item.id)} className="smallerButton ">Remover</button>
                 </div>
               </CardMyProduct>
             ))}

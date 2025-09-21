@@ -2,7 +2,7 @@ import "../../styles/listFilterCatalog.css";
 
 function ListFilterCatalog({ onFilterChange, selectedCategory }) {
   const categories = [
-    { front: "Todas as categorias", toBack: "TODAS AS CATEGORIAS" },
+    { front: "Todas as categorias", toBack: "Todas as categorias" },
     { front: "Brinquedos", toBack: "BRINQUEDOS" },
     { front: "Calçados", toBack: "CALCADOS" },
     { front: "Celulares", toBack: "CELULARES" },

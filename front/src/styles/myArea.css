@@ -64,3 +64,8 @@ h1 {
   }
  
 }
+
+.box-button {
+  display: flex;
+  gap: 1rem;
+}
