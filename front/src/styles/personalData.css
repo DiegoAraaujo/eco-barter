@@ -1,3 +1,16 @@
+.main-dados {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  align-items: center;
+  justify-content: center;
+}
+
+.main-dados h1 {
+    padding-bottom: 4rem;
+}
+
 .titulo-dados {
     font-size: 2rem;
     color: var(--brand);
@@ -7,13 +20,22 @@
 }
 
 .dados-box {
-    background-color: var(--bg-muted);
-    padding: 30px;
+    background-color: var(--form-color);
+    padding: 5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow-2);
     width: 100%;
     max-width: 500px;
     margin-inline: auto;
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+  .dados-box { 
+    margin: 0;
+    width: 90%;
+  }
 }
 
 .dados-form {

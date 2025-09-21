@@ -29,8 +29,7 @@ export default function PersonalData() {
     };
 
     return (
-        <main id="conteudo" className="main-dados">
-            <Header />
+        <main className="main-dados">
             <h1>Dados Pessoais</h1>
 
             <div className="dados-box">
@@ -136,7 +135,6 @@ export default function PersonalData() {
                     </p>
                 </form>
             </div>
-            <Footer />
         </main>
     );
 }
