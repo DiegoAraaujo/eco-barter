@@ -88,10 +88,6 @@ export const updateUsuarioHandler = async (req, res) => {
 
   const { nome, fullName, email, phone, city, state, passwordHash } = req.body;
 
-  if (!nome) {
-    return res.status(400).json({ error: "Nome é obrigatório" });
-  }
-
   try {
     const account = await updateUsuario(
       id,

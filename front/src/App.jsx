@@ -25,7 +25,7 @@ function App() {
           <Route element={<ProtectedLayout />}>
             <Route path="/myarea" element={<MyArea />} />
             <Route path="/catalogpage" element={<CatalogPage />} />
-            <Route path="/personal-data" element={<PersonalData />} />
+            <Route path="/personal-data/:id" element={<PersonalData />} />
             <Route path="/item/:id" element={<Item />} />
             <Route path="/additem" element={<AddItem />} />
             <Route path="/edit-item/:id" element={<EditItem />} />

@@ -89,15 +89,6 @@ function EditItemForm() {
     return <p>Carregando dados do item...</p>;
   }
 
-  if (error) {
-    return (
-      <div>
-        <p>{error}</p>
-        <button onClick={() => navigate("/myarea")}>Voltar</button>
-      </div>
-    );
-  }
-
   if (!originalData) {
     return <p>Carregando dados do formulário...</p>;
   }
@@ -119,13 +110,8 @@ const handleSubmit = async (e) => {
     alert("Item atualizado com sucesso!");
     navigate("/myarea");
   } catch (error) {
-    console.error("Erro completo:", error);
-    console.error("Resposta do servidor:", error.response?.data);
-    if (error.response?.data?.error) {
-      alert(error.response.data.error);
-    } else {
+      console.error("Erro ao atualizar:", error);
       alert("Erro ao atualizar o item. Tente novamente.");
-    }
   }
 };
 
@@ -142,7 +128,7 @@ const handleSubmit = async (e) => {
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder={originalData.name || "Título atual"}
+              placeholder="Ex.: Boneco do ToyStory"
             />
           </label>
 
@@ -153,7 +139,7 @@ const handleSubmit = async (e) => {
               name="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder={originalData.description || "Descrição atual"}
+              placeholder="Brinquedinho muito divertido e legal, a criançada adora. Ao infinito e além!"
             />
           </label>
 
@@ -196,7 +182,7 @@ const handleSubmit = async (e) => {
               name="district"
               value={district}
               onChange={(e) => setDistrict(e.target.value)}
-              placeholder={originalData.district || "Local atual"}
+              placeholder="Local atual"
             />
           </label>
 
@@ -207,7 +193,7 @@ const handleSubmit = async (e) => {
               name="img"    
               value={img}
               onChange={(e) => setImg(e.target.value)}
-              placeholder={originalData.imageUrl || "URL da imagem atual"}
+              placeholder="URL da imagem atual"
             />
           </label>
           <div className="container-button">

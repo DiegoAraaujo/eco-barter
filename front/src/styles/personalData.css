@@ -107,15 +107,11 @@
     background-color: var(--brand-700);
 }
 
-/* Feedback de sucesso */
-.feedback-sucesso {
-    color: var(--ok);
-    font-weight: bold;
-    text-align: center;
-    transition: visibility .3s ease, opacity .3s ease;
-    opacity: 0;
-}
-
-.feedback-sucesso[style*="visible"] {
-    opacity: 1;
+.box-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    gap: 6rem;
+    padding-top: 2rem;
 }
