@@ -100,7 +100,16 @@ export const updateUsuarioHandler = async (req, res) => {
       passwordHash
     );
 
-    res.status(200).json(account);
+    const accountSafe = {
+      id: account.id,
+      name: account.name,
+      fullName: account.fullName,
+      email: account.email,
+      phone: account.phone,
+      city: account.city,
+      state: account.state,
+    };
+    res.status(200).json(accountSafe);
   } catch (error) {
     if (error.message === "Usuário não encontrado") {
       return res.status(404).json({ error: "Usuário não encontrado" });
@@ -160,7 +169,6 @@ export const userAuthHandler = async (req, res) => {
         maxAge: 24 * 60 * 60 * 1000,
       })
       .json(payload);
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Erro no servidor" });

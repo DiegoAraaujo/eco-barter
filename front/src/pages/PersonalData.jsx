@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import SmallerButton from "../components/ui/SmallerButton";
 import "../styles/personalData.css";
@@ -6,16 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 
 export default function PersonalData() {
-  const { user } = useUserContext();
+  const { user, setUser } = useUserContext();
   const navigate = useNavigate();
-  const handleGoBack = () => { navigate("/myarea"); };
-  
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
+  const handleGoBack = () => {
+    navigate("/myarea");
+  };
+
+  const [fullName, setFullName] = useState(user?.fullName || "");
+  const [email, setEmail] = useState(user?.email || "");
   const [passwordHash, setPasswordHash] = useState("");
-  const [phone, setPhone] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [phone, setPhone] = useState(user?.phone || "");
+  const [city, setCity] = useState(user?.city || "");
+  const [state, setState] = useState(user?.state || "");
   const [error, setError] = useState("");
 
   if (!user) {
@@ -26,19 +28,21 @@ export default function PersonalData() {
     e.preventDefault();
 
     const updateData = {
-      fullName: fullName || user.fullName,
-      email: email || user.email,
-      passwordHash: passwordHash || undefined,
-      phone: phone || user.phone,
-      city: city || user.city,
-      state: state || user.state
+      fullName,
+      email,
+      passwordHash: passwordHash || undefined, // só envia se usuário mudar
+      phone,
+      city,
+      state,
     };
 
     try {
-      const response = await axios.put(`http://localhost:3000/usuarios/${user.id}`, updateData);
+      const userUpdated = await axios.put(`http://localhost:3000/usuarios/${user.id}`, updateData);
+      console.log(userUpdated.data)
+      setUser(userUpdated.data)
       alert("Usuário atualizado com sucesso!");
       navigate("/myarea");
-    } catch(error) {
+    } catch (error) {
       console.error("Erro ao atualizar:", error);
       alert("Erro ao atualizar o usuário. Tente novamente.");
     }
@@ -59,8 +63,8 @@ export default function PersonalData() {
                 type="text"
                 placeholder="Ex.: Maria Souza"
                 autoComplete="name"
-                value={fullName} 
-                onChange={(e) => setFullName(e.target.value)} 
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
               />
             </div>
 
@@ -70,8 +74,8 @@ export default function PersonalData() {
                 type="email"
                 placeholder="seuemail@exemplo.com"
                 autoComplete="email"
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -82,8 +86,8 @@ export default function PersonalData() {
                 placeholder="Mín. 6 caracteres"
                 autoComplete="new-password"
                 minLength={6}
-                value={passwordHash} 
-                onChange={(e) => setPasswordHash(e.target.value)} 
+                value={passwordHash}
+                onChange={(e) => setPasswordHash(e.target.value)}
               />
             </div>
           </fieldset>
@@ -99,8 +103,8 @@ export default function PersonalData() {
                 autoComplete="tel"
                 inputMode="numeric"
                 pattern="[0-9\s\(\)\-+]*"
-                value={phone} 
-                onChange={(e) => setPhone(e.target.value)} 
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
 
@@ -110,8 +114,8 @@ export default function PersonalData() {
                 type="text"
                 placeholder="Sobral"
                 autoComplete="address-level2"
-                value={city} 
-                onChange={(e) => setCity(e.target.value)} 
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
 
@@ -122,14 +126,18 @@ export default function PersonalData() {
                 placeholder="CE"
                 autoComplete="address-level1"
                 maxLength={2}
-                value={state} 
+                value={state}
                 onChange={(e) => setState(e.target.value)}
               />
             </div>
           </fieldset>
-          
+
           <div className="box-button">
-            <button type="button" onClick={handleGoBack} className="smallerButton">
+            <button
+              type="button"
+              onClick={handleGoBack}
+              className="smallerButton"
+            >
               Voltar
             </button>
             <SmallerButton buttontype="submit" buttonMessage="Salvar Dados" />

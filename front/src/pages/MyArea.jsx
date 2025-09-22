@@ -10,7 +10,6 @@ function MyArea() {
   const { user } = useUserContext();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [infoUser, setInfoUser] = useState([]);
   const navigate = useNavigate();
 
   const handleDeleteItem = async (id) => {
@@ -29,42 +28,42 @@ function MyArea() {
     }
   };
 
-useEffect(() => {
-  if (!user?.id) {
-    setLoading(false);
-    return;
-  }
-
-  async function fetchAllData() {
-    setLoading(true);
-    try {
-      const [itemsResponse, userResponse] = await Promise.all([
-        axios.get(`http://localhost:3000/item/account/${user.id}`),
-        axios.get(`http://localhost:3000/usuarios/me`)
-      ]);
-
-      setItems(itemsResponse.data);
-      setInfoUser([
-        { label: "Nome: ", value: userResponse.data.fullName },
-        { label: "Email: ", value: userResponse.data.email },
-        { label: "Senha: ", value: "******" },
-        { label: "Telefone: ", value: userResponse.data.phone },
-        { label: "Cidade: ", value: userResponse.data.city },
-        { label: "Estado: ", value: userResponse.data.state }
-      ]);
-    } catch (e) {
-      alert(e?.response?.data?.message || e?.message || "Erro ao carregar dados");
-    } finally {
+  useEffect(() => {
+    if (!user?.id) {
       setLoading(false);
+      return;
     }
-  }
 
-  fetchAllData();
-}, [user]);
+    async function fetchItems() {
+      setLoading(true);
+      try {
+        const itemsResponse = await axios.get(
+          `http://localhost:3000/item/account/${user.id}`
+        );
+        setItems(itemsResponse.data);
+      } catch (e) {
+        alert(
+          e?.response?.data?.message || e?.message || "Erro ao carregar itens"
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
 
+    fetchItems();
+  }, [user]);
 
   if (!user) return <p>Você precisa estar logado para ver seus itens.</p>;
   if (loading) return <p>Carregando itens...</p>;
+
+  const infoUser = [
+    { label: "Nome: ", value: user.fullName },
+    { label: "Email: ", value: user.email },
+    { label: "Senha: ", value: "******" },
+    { label: "Telefone: ", value: user.phone },
+    { label: "Cidade: ", value: user.city },
+    { label: "Estado: ", value: user.state },
+  ];
 
   return (
     <main className="main-container">
