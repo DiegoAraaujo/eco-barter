@@ -84,9 +84,11 @@ function MyArea() {
                     </div>
                   )
               )}
-              <Link to={`/personal-data/${user.id}`}>
-                <SmallerButton buttonMessage="Editar Informações" />
-              </Link>
+              <div className="box-button-item">
+                <Link to={`/personal-data/${user.id}`}>
+                  <SmallerButton buttonMessage="Editar Informações" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -106,7 +108,7 @@ function MyArea() {
                     category={item.category}
                     productState={item.status}
                   >
-                    <div className="box-button">
+                    <div className="box-button-item ">
                       <Link to={`/edit-item/${item.id}`}>
                         <SmallerButton buttonMessage="Editar" />
                       </Link>

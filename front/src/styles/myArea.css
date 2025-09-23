@@ -134,7 +134,8 @@ h1 {
  
 }
 
-.box-button {
+.box-button-item {
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }

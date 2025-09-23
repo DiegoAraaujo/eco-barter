@@ -24,10 +24,6 @@ function Login() {
       alert("insira um formato valido de email");
     }
 
-    if (!password.trim() || password.length < 8) {
-      alert("coloque uma senha valida");
-    }
-
     try {
       const userLogged = await axios.post(
         "http://localhost:3000/usuarios/login",

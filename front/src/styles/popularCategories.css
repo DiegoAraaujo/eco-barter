@@ -40,9 +40,21 @@
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  gap: 1rem;
+  gap: 3rem;
   flex: 1;
   scroll-snap-type: x mandatory;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+
+@media (max-width: 900px) {
+  .popular-categories-list {
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 3rem 5rem 3rem 5rem;
+  }
 }
 
 .popular-categories-list::-webkit-scrollbar {

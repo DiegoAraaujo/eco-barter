@@ -7,7 +7,7 @@ const FALLBACK_IMG = "https://via.placeholder.com/800x600?text=Sem+imagem";
 
 const CONDITION_LABEL = {
   NEW: "Novo",
-  USED: "Usado - Excelente estado",
+  USED: "Usado",
   REFURBISHED: "Reformado",
 };
 

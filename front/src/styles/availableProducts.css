@@ -1,9 +1,9 @@
 .products-section{
   background-color: var(--dark-green);
-  padding: 2rem;
+  padding: 5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .products-section > h2{
